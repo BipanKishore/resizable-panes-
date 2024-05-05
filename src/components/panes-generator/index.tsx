@@ -28,7 +28,7 @@ import { paneClasses } from "./pane-css"
   }
   
 
-  export const getInitialVisibility =  (list: PaneModelConfig[]) => {
+  export const getInitialVisibility =  (list: any[]) => {
     const initalVisibility: any = {}
   
     list.forEach((_, index) => {

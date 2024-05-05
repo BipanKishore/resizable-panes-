@@ -1,11 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { BUTTOM_FIRST, ZIPPED, rScontainerId } from '../../../src/shared/constant'
 import { generatePaneModel, getInitialVisibility, getSelectListForPaneIds } from '../panes-generator'
 import { ResizablePanes } from 'resizable-panes-react'
-import { _4PanesWithMinMax } from '../../shared/pane-model-config-sets'
 import { DemoHeader } from '../demo-header'
 import { DemoFooter } from '../demo-footer'
-import { initialResizableFormValues } from './util'
+import { INITIAL_CONFIG, initialResizableFormValues, storageApiFlagKey, storeBooleanKey } from './util'
 
 
 interface IIDMap {
@@ -14,43 +13,39 @@ interface IIDMap {
 
 export const ResizableDemo = () => {
 
-  const [activePanesSet, setActivePanesSet] = useState(_4PanesWithMinMax)
-  const [paneComponentLists, setPaneComponentLists] = useState(generatePaneModel(activePanesSet))
-  const [paneIdsList, setPaneIdsList] = useState(getSelectListForPaneIds(activePanesSet))
-  const [paneVisibilityState, setPaneVisibilityState] = useState(getInitialVisibility(activePanesSet))
+  const [paneComponentLists, setPaneComponentLists] = useState(generatePaneModel([]))
+  const [paneIdsList, setPaneIdsList] = useState(getSelectListForPaneIds([]))
+  const [paneVisibilityState, setPaneVisibilityState] = useState(getInitialVisibility([]))
+  const [initialConfig, setInitialConfig] = useState<any>({})
 
-  const [shouldMountResizable, setSholdMountResizable] = useState(true)
+  const [shouldMountResizable, setSholdMountResizable] = useState(false)
 
   const [visibilityMap, setVisibilityMap] = useState<IIDMap>(paneVisibilityState)
-  
-  const [formValues, setFormValues] = useState<any>(initialResizableFormValues)
-
-  const onBtnChange = (e: any) => {
-    const { name, value } = e
-    setFormValues((preFormValues: any) => ({
-      ...preFormValues,
-      [name]: value
-    }))
-  }
-
-  const onFormChange = (e: any) => {
-    const { name, value } = e.target
-    setFormValues((preFormValues: any) => ({
-      ...preFormValues,
-      [name]: value
-    }))
-  }
-
-  const onChangeSize = (e: any) => {
-    const { name, value } = e.target
-    setFormValues((preFormValues: any) => ({
-      ...preFormValues,
-      [name]: value > 0 ? value : preFormValues[name]
-    }))
-  }
 
 
-  const rerenderResizable = () => {
+  const onUpdateInitalConfig = (updatedInitalConfig: any, byPassStorageCheck = true) => {
+
+    const {
+      activePanesSet,
+      storageApiFlag
+    } = updatedInitalConfig
+
+
+    storeBooleanKey(storageApiFlagKey, storageApiFlag)
+
+    setInitialConfig((previousState: any) => {
+      if (!byPassStorageCheck) {
+        if (previousState.storageApiFlag !== storageApiFlag) {
+          localStorage.clear()
+        }
+      }
+
+      return {
+        storageApi: storageApiFlag ? localStorage : null,
+        ...updatedInitalConfig
+      }
+    })
+
     setSholdMountResizable(false)
     const newPaneIdsList = getSelectListForPaneIds(activePanesSet)
     setPaneIdsList(newPaneIdsList)
@@ -61,9 +56,13 @@ export const ResizableDemo = () => {
     setTimeout(() => setSholdMountResizable(true), 1)
   }
 
+  useEffect(() => {
+    console.log('hhhhhhhhhhhhhhhhhhhhh')
+    onUpdateInitalConfig(INITIAL_CONFIG, false)
+  }, [])
 
   const onRestore = () => {
-    setVisibilityMap(getInitialVisibility(activePanesSet))
+    setVisibilityMap(getInitialVisibility(paneIdsList))
     apiRef.current.restoreDefault()
   }
 
@@ -84,39 +83,39 @@ export const ResizableDemo = () => {
     }
   }
 
+
+  console.log(
+    'shouldMountResizable',
+    shouldMountResizable,
+    'initialConfig',
+    initialConfig
+  )
+
   return (
     <div className='h-100p w-100p px-6' >
 
       <DemoHeader
-        apiRef={apiRef}
-        formValues={formValues}
-        selectIdsOption={paneIdsList}
-        onBtnChange={onBtnChange}
-        onFormChange={onFormChange}
-        onChangeSize={onChangeSize}
-        onRestore={onRestore}
-        rerenderResizable={rerenderResizable}
-        setActivePanesSet={setActivePanesSet}
+        onUpdateInitalConfig={onUpdateInitalConfig}
       />
-
 
       <div className='h-80 w-100p mt-5'>
         {
           shouldMountResizable &&
           <ResizablePanes
             visibility={visibilityMap}
+
             onReady={(api) => {
               apiRef.current = api
             }}
+
             activeResizerClass=''
             uniqueId={rScontainerId}
-            destroyOnHide={formValues.destroyOnHide}
-            resizerClass={`bg-slate-500 ${formValues.vertical ? 'h-5/6 my-auto' : 'w-5/6 mx-auto'}`}
-            zipping={formValues.zipping}
-            vertical={formValues.vertical}
-            storageApi={formValues.storageApi ? localStorage : null}
+            destroyOnHide={initialConfig.unmounOnHide}
+            {
+            ...initialConfig
+            }
+            resizerClass={`bg-slate-500 ${initialConfig.vertical ? 'h-5/6 my-auto' : 'w-5/6 mx-auto'}`}
             onChangeVisibility={setPaneVisibilityState}
-            resizerSize={Number(formValues.resizerSize)}
           >
             {paneComponentLists}
           </ResizablePanes>
@@ -129,11 +128,9 @@ export const ResizableDemo = () => {
         paneVisibilityState={paneVisibilityState}
         updateVisibilityMap={updateVisibilityMap}
 
-        formValues={formValues}
         onRestore={onRestore}
-        onChangeSize={onChangeSize}
         apiRef={apiRef}
-        onBtnChange={onBtnChange}
+        
       />
 
     </div>
