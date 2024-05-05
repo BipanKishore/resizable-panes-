@@ -24,34 +24,25 @@ interface IAppModal {
 
 export function AppModal(props: IAppModal) {
 
-const {isOpen, 
-  closeModal,
-  title,
-  children
-} = props
-
-  
-
-
-
-
-
+  const { isOpen,
+    closeModal,
+    title,
+    children
+  } = props
 
   return (
     <div>
       <Modal
         isOpen={isOpen}
-        onAfterOpen={() => {}}
+        onAfterOpen={() => { }}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2 className='text-xl bold ' >{title}</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-    <div>
-      {children}
-    </div>
+        <h2 className='text-xl bold'>{title}</h2>
+        <div>
+          {children}
+        </div>
       </Modal>
     </div>
   );
