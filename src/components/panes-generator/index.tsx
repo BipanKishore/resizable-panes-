@@ -1,54 +1,48 @@
-import { Pane } from "resizable-panes-react"
-import { PaneModelConfig } from "../../../src/shared/models"
-import React from "react"
-import { Loading } from "../Loading"
-import { ISelectList } from "../select"
-import { paneClasses } from "./pane-css"
-  
-  export const generatePaneModel = (list: PaneModelConfig[]) => {
-    const paneComponentLists = list.map(({size, minSize, maxSize}, index) =>
-      (
-        <Pane
-          className={`${paneClasses[index].container} text-center text-2xl text-white rounded-lg`}
-          id={`P${index}`}
-          key={index}
-          maxSize={maxSize}
-          minSize={minSize}
-          size={size}
-        >
-          <div className="mt-8 text-slate-700" >
-          {<h2>{`P${index}`}</h2>}
-          <Loading />
-          </div>
-        </Pane>
-      )
-    )
-  
-    return paneComponentLists
-  }
-  
+import { Pane } from "resizable-panes-react";
+import { PaneModelConfig } from "../../../src/shared/models";
+import React from "react";
+import { Loading } from "../Loading";
+import { ISelectList } from "../select";
+import { paneClasses } from "./pane-css";
 
-  export const getInitialVisibility =  (list: any[]) => {
-    const initalVisibility: any = {}
-  
-    list.forEach((_, index) => {
-      initalVisibility[`P${index}`] = true
-    })
+export const generatePaneModel = (list: PaneModelConfig[]) => {
+  const paneComponentLists = list.map(({ size, minSize, maxSize }, index) => (
+    <Pane
+      className={`${paneClasses[index].container} text-center text-2xl text-white rounded-lg`}
+      id={`P${index}`}
+      key={index}
+      maxSize={maxSize}
+      minSize={minSize}
+      size={size}
+    >
+      <div className="mt-8 text-slate-700">
+        {<h2>{`P${index}`}</h2>}
+        <Loading />
+      </div>
+    </Pane>
+  ));
 
-    return initalVisibility
-  }
+  return paneComponentLists;
+};
 
-  
-  export const getSelectListForPaneIds =  (list: PaneModelConfig[]) => {
-    const selectList: ISelectList[] = []
-    list.forEach((_, index) => {
-      selectList.push(
-        {
-          paneClasses: paneClasses[index]  ,
-          label: `P${index}`,
-          value: `P${index}`
-        }
-      )
-    })
-    return selectList
-  }
+export const getInitialVisibility = (list: any[]) => {
+  const initalVisibility: any = {};
+
+  list.forEach((_, index) => {
+    initalVisibility[`P${index}`] = true;
+  });
+
+  return initalVisibility;
+};
+
+export const getSelectListForPaneIds = (list: PaneModelConfig[]) => {
+  const selectList: ISelectList[] = [];
+  list.forEach((_, index) => {
+    selectList.push({
+      paneClasses: paneClasses[index],
+      label: `P${index}`,
+      value: `P${index}`,
+    });
+  });
+  return selectList;
+};

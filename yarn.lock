@@ -8249,10 +8249,10 @@ requires-port@^1.0.0:
   resolved "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz"
   integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
 
-resizable-panes-react@^4.0.36:
-  version "4.0.36"
-  resolved "https://registry.npmjs.org/resizable-panes-react/-/resizable-panes-react-4.0.36.tgz"
-  integrity sha512-IatyfuYoXc9Pubo/4rsLf/iWrcjTHKeMqR1YJB15RPoU/6wnILrOQ05i8kEeBstFI5898pUgORqCS7tgWN2jyA==
+resizable-panes-react@^4.0.37:
+  version "4.0.37"
+  resolved "https://registry.npmjs.org/resizable-panes-react/-/resizable-panes-react-4.0.37.tgz"
+  integrity sha512-wbVBtJChC71DcRJ22Vu7mTzNkRT7zG9gInkKMd1GL6ftyG4sdMEy3uzbsH3AhPwL4OpNTWSx0cED5I1gfoZ6NA==
 
 resolve-cwd@^3.0.0:
   version "3.0.0"

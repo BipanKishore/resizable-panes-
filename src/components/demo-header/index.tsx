@@ -62,9 +62,9 @@ export const DemoHeader = ({
     return (
         <div>
             <h1>This library is highly customizable and can be used in various applications where flexible layout system is required.</h1>
-            <div className='grid grid-cols-2 mt-4' >
+            <div className='grid grid-cols-7 mt-4' >
 
-                <h2 className='text-3xl bold text-slate-800'>Edit Inital Config</h2>
+                <h2 className='text-3xl bold text-slate-800 col-span-6'>Edit Inital Config</h2>
                 <div className='justify-self-end text-xl self-center cursor-pointer' >
                     <FontAwesomeIcon onClick={openModal} icon={faFilePen} className='text-cyan-600 hover:text-cyan-500' size="lg" />
                 </div>

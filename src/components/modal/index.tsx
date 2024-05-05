@@ -57,14 +57,13 @@ export function AppModal(props: IAppModal) {
           </div>
 
           <div className='border-solid border-t mt-6 pt-4 grid items-center' >
-            <Button
-              className="justify-self-end"
-              label='Apply'
-              onClick={onConfirm}
-            >
-            </Button>
+            <div>
+              <Button
+                onClick={onConfirm}
+                label="Apply"
+              />
+            </div>
           </div>
-
         </div>
       </Modal>
     </div>

@@ -1,96 +1,107 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { BUTTOM_FIRST, VISIBLE, ZIPPED, rScontainerId } from '../../../src/shared/constant'
-import { generatePaneModel, getInitialVisibility, getSelectListForPaneIds } from '../panes-generator'
-import { ResizablePanes } from 'resizable-panes-react'
-import { DemoHeader } from '../demo-header'
-import { DemoFooter } from '../demo-footer'
-import { INITIAL_CONFIG, initialResizableFormValues, storageApiFlagKey, storeBooleanKey } from './util'
-
+import React, { useEffect, useRef, useState } from "react";
+import {
+  BUTTOM_FIRST,
+  VISIBLE,
+  ZIPPED,
+  rScontainerId,
+} from "../../../src/shared/constant";
+import {
+  generatePaneModel,
+  getInitialVisibility,
+  getSelectListForPaneIds,
+} from "../panes-generator";
+import { ResizablePanes } from "resizable-panes-react";
+import { DemoHeader } from "../demo-header";
+import { DemoFooter } from "../demo-footer";
+import { INITIAL_CONFIG, storageApiFlagKey, storeBooleanKey } from "./util";
 
 interface IIDMap {
-  [id: string]: boolean
+  [id: string]: boolean;
 }
 
 export const ResizableDemo = () => {
+  const [paneComponentLists, setPaneComponentLists] = useState(
+    generatePaneModel([])
+  );
+  const [paneIdsList, setPaneIdsList] = useState(getSelectListForPaneIds([]));
+  const [paneVisibilityState, setPaneVisibilityState] = useState(
+    getInitialVisibility([])
+  );
+  const [initialConfig, setInitialConfig] = useState<any>({});
 
-  const [paneComponentLists, setPaneComponentLists] = useState(generatePaneModel([]))
-  const [paneIdsList, setPaneIdsList] = useState(getSelectListForPaneIds([]))
-  const [paneVisibilityState, setPaneVisibilityState] = useState(getInitialVisibility([]))
-  const [initialConfig, setInitialConfig] = useState<any>({})
+  const [shouldMountResizable, setSholdMountResizable] = useState(false);
 
-  const [shouldMountResizable, setSholdMountResizable] = useState(false)
+  const [visibilityMap, setVisibilityMap] =
+    useState<IIDMap>(paneVisibilityState);
 
-  const [visibilityMap, setVisibilityMap] = useState<IIDMap>(paneVisibilityState)
+  const onUpdateInitalConfig = (
+    updatedInitalConfig: any,
+    allowStorageCheck = true
+  ) => {
+    const { activePanesSet, storageApiFlag } = updatedInitalConfig;
 
-
-  const onUpdateInitalConfig = (updatedInitalConfig: any, byPassStorageCheck = true) => {
-
-    const {
-      activePanesSet,
-      storageApiFlag
-    } = updatedInitalConfig
-
-
-    storeBooleanKey(storageApiFlagKey, storageApiFlag)
-
+    storeBooleanKey(storageApiFlagKey, storageApiFlag);
+    console.log("-----------------------------------------", allowStorageCheck);
     setInitialConfig((previousState: any) => {
-      if (!byPassStorageCheck) {
+      if (allowStorageCheck) {
+        console.log(
+          "-----------------------------------------",
+          allowStorageCheck
+        );
         if (previousState.storageApiFlag !== storageApiFlag) {
-          localStorage.clear()
+          localStorage.clear();
         }
       }
 
       return {
         storageApi: storageApiFlag ? localStorage : null,
-        ...updatedInitalConfig
-      }
-    })
+        ...updatedInitalConfig,
+      };
+    });
 
-    setSholdMountResizable(false)
-    const newPaneIdsList = getSelectListForPaneIds(activePanesSet)
-    setPaneIdsList(newPaneIdsList)
-    const newPaneVisibilityState = getInitialVisibility(activePanesSet)
-    setPaneVisibilityState(newPaneVisibilityState)
-    const newpPaneComponentLists = generatePaneModel(activePanesSet)
-    setPaneComponentLists(newpPaneComponentLists)
-    setTimeout(() => setSholdMountResizable(true), 1)
-  }
+    setSholdMountResizable(false);
+    const newPaneIdsList = getSelectListForPaneIds(activePanesSet);
+    setPaneIdsList(newPaneIdsList);
+    const newPaneVisibilityState = getInitialVisibility(activePanesSet);
+    setPaneVisibilityState(newPaneVisibilityState);
+    const newpPaneComponentLists = generatePaneModel(activePanesSet);
+    setPaneComponentLists(newpPaneComponentLists);
+    setTimeout(() => setSholdMountResizable(true), 1);
+  };
 
   useEffect(() => {
-    console.log('hhhhhhhhhhhhhhhhhhhhh')
-    onUpdateInitalConfig(INITIAL_CONFIG, false)
-  }, [])
+    console.log("hhhhhhhhhhhhhhhhhhhhh");
+    onUpdateInitalConfig(INITIAL_CONFIG, false);
+  }, []);
 
   const onRestore = () => {
-    setVisibilityMap(getInitialVisibility(paneIdsList))
-    apiRef.current.restoreDefault()
-  }
+    setVisibilityMap(getInitialVisibility(paneIdsList));
+    apiRef.current.restoreDefault();
+  };
 
-  const apiRef = useRef<any>({})
+  const apiRef = useRef<any>({});
 
   const updateVisibilityMap = (e: any) => {
-    const { name, checked } = e
-    const previousState = paneVisibilityState[name]
-    
+    const { name, checked } = e;
+    const previousState = paneVisibilityState[name];
+
     if (previousState === ZIPPED) {
-      apiRef.current.setSize(name, 150, BUTTOM_FIRST)
+      apiRef.current.setSize(name, 150, BUTTOM_FIRST);
     } else {
+      const newVisibilityMap: any = {};
 
-      const newVisibilityMap : any = {}
-    
-      Object.keys(paneVisibilityState)
-      .forEach(key => {
-        newVisibilityMap[key] = [VISIBLE, ZIPPED].includes(paneVisibilityState[key])
-      })
+      Object.keys(paneVisibilityState).forEach((key) => {
+        newVisibilityMap[key] = [VISIBLE, ZIPPED].includes(
+          paneVisibilityState[key]
+        );
+      });
 
-  
       apiRef.current.setVisibility({
         ...newVisibilityMap,
-        [name]: checked
-      })
+        [name]: checked,
+      });
     }
-  }
-
+  };
 
   // console.log(
   //   'shouldMountResizable',
@@ -100,46 +111,37 @@ export const ResizableDemo = () => {
   // )
 
   return (
-    <div className='h-100p w-100p px-6' >
+    <div className="h-100p w-100p px-6">
+      <DemoHeader onUpdateInitalConfig={onUpdateInitalConfig} />
 
-      <DemoHeader
-        onUpdateInitalConfig={onUpdateInitalConfig}
-      />
-
-      <div className='h-80 w-100p mt-5'>
-        {
-          shouldMountResizable &&
+      <div className="h-80 w-100p mt-5">
+        {shouldMountResizable && (
           <ResizablePanes
             visibility={visibilityMap}
-
             onReady={(api) => {
-              apiRef.current = api
+              apiRef.current = api;
             }}
-
-            activeResizerClass=''
+            activeResizerClass=""
             uniqueId={rScontainerId}
             destroyOnHide={initialConfig.unmounOnHide}
-            {
-            ...initialConfig
-            }
-            resizerClass={`bg-slate-500 ${initialConfig.vertical ? 'h-5/6 my-auto' : 'w-5/6 mx-auto'}`}
+            {...initialConfig}
+            resizerClass={`bg-slate-500 ${
+              initialConfig.vertical ? "h-5/6 my-auto" : "w-5/6 mx-auto"
+            }`}
             onChangeVisibility={setPaneVisibilityState}
           >
             {paneComponentLists}
           </ResizablePanes>
-        }
-
+        )}
       </div>
 
       <DemoFooter
         selectIdsOption={paneIdsList}
         paneVisibilityState={paneVisibilityState}
         updateVisibilityMap={updateVisibilityMap}
-
         onRestore={onRestore}
         apiRef={apiRef}
       />
-
     </div>
-  )
-}
+  );
+};
