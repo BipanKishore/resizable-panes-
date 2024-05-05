@@ -13,7 +13,8 @@ export const DemoHeader = ({
     onBtnChange,
     selectIdsOption,
     onChangePanesSet,
-    rerenderResizable
+    rerenderResizable,
+    setActivePanesSet
 }: any) => {
 
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -26,6 +27,15 @@ export const DemoHeader = ({
         setIsOpen(false);
     }
 
+    const onConfirm =() => {
+        onChangePanesSet()
+    }
+
+    const onChangeSelect = (newPanesPayload: any) => {
+        const {value: {value}} = newPanesPayload
+        setActivePanesSet(value)
+        closeModal()
+    }
 
     return (
         <div>
@@ -38,17 +48,18 @@ export const DemoHeader = ({
                 </div>
             </div>
             <AppModal
-            title='Initial Config'
+                title='Initial Config'
                 isOpen={modalIsOpen}
                 closeModal={closeModal}
+                onConfirm={onConfirm}
             >
                 <div className='grid grid-cols-1 gap-20' >
                     <InitialConfig
-                        onChangePanesSet={onChangePanesSet}
                         rerenderResizable={rerenderResizable}
                         formValues={formValues}
                         onBtnChange={onBtnChange}
                         onChangeSize={onChangeSize}
+                        setActivePanesSet={onChangeSelect}
                     />
                 </div>
 

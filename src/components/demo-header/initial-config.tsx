@@ -6,7 +6,9 @@ import { PanesCollectionListRatioMode } from "../../shared/pane-model-config-set
 
 
 
-export const InitialConfig = ({ rerenderResizable, formValues, onBtnChange, onChangeSize, onChangePanesSet }: any) => {
+export const InitialConfig = ({ rerenderResizable, formValues,
+    onBtnChange, onChangeSize, onChangePanesSet,
+    setActivePanesSet }: any) => {
 
     const onChangeStorgeApi = (e: any) => {
         onBtnChange(e)
@@ -25,14 +27,22 @@ export const InitialConfig = ({ rerenderResizable, formValues, onBtnChange, onCh
     }
 
     return <div className='max-w-screen-lg mx-auto rounded-lg'>
-        <div className="grid grid-cols-6 gap-4" >
-
+        <div className="grid grid-cols-4 gap-6" >
             <Select
+                label='Select Panes set'
                 className="w-full "
                 list={PanesCollectionListRatioMode}
                 id="panesSet"
                 formValues={formValues}
-                onChange={onChangePanesSet}
+                onChange={setActivePanesSet}
+            />
+
+            <TextField
+                label='Resizer Size'
+                fValue={formValues}
+                name="resizerSize"
+                onChange={onTextChange}
+                type='number'
             />
 
 
@@ -68,13 +78,7 @@ export const InitialConfig = ({ rerenderResizable, formValues, onBtnChange, onCh
                 label="Storage Api"
             />
 
-            <TextField
-                label='Resizer Size'
-                fValue={formValues}
-                name="resizerSize"
-                onChange={onTextChange}
-                type='number'
-            />
+
         </div>
     </div>
 }

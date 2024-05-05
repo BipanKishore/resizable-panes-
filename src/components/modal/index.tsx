@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import Modal from 'react-modal';
+import Button from '../button';
 Modal.setAppElement('#root');
 
 
@@ -18,17 +19,14 @@ interface IAppModal {
   isOpen: boolean,
   closeModal: any,
   title: string,
-  children: ReactElement
+  children: ReactElement,
+  onConfirm: any
 }
 
 
 export function AppModal(props: IAppModal) {
 
-  const { isOpen,
-    closeModal,
-    title,
-    children
-  } = props
+  const { isOpen, closeModal, title, children, onConfirm } = props
 
   return (
     <div>
@@ -39,9 +37,21 @@ export function AppModal(props: IAppModal) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2 className='text-xl bold'>{title}</h2>
-        <div>
-          {children}
+        <div className='p-4' >
+          <h2 className='text-3xl bold mb-6 '>{title}</h2>
+          <div>
+            {children}
+          </div>
+
+          <div className='float-right'>
+            
+            <Button
+            label='Apply'
+            onClick={onConfirm}
+            >
+
+            </Button>
+            </div>
         </div>
       </Modal>
     </div>

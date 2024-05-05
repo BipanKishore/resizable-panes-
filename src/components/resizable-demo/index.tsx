@@ -57,15 +57,14 @@ export const ResizableDemo = () => {
 }
 
   const onChangePanesSet = (newPanesPayload: any) => {
-    const {value: {value}} = newPanesPayload
     setSholdMountResizable(false)
 
-    setActivePanesSet(value)
-    const newPaneIdsList = getSelectListForPaneIds(value)
+
+    const newPaneIdsList = getSelectListForPaneIds(activePanesSet)
     setPaneIdsList(newPaneIdsList)
-    const newPaneVisibilityState = getInitialVisibility(value)
+    const newPaneVisibilityState = getInitialVisibility(activePanesSet)
     setPaneVisibilityState(newPaneVisibilityState)
-    const newpPaneComponentLists = generatePaneModel(value)
+    const newpPaneComponentLists = generatePaneModel(activePanesSet)
     setPaneComponentLists(newpPaneComponentLists)
     rerenderResizable()
   }
@@ -106,6 +105,7 @@ export const ResizableDemo = () => {
         onRestore={onRestore}
         onChangePanesSet={onChangePanesSet}
         rerenderResizable={rerenderResizable}
+        setActivePanesSet={setActivePanesSet}
       />
 
 
