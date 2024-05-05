@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { BUTTOM_FIRST, ZIPPED, rScontainerId } from '../../../src/shared/constant'
+import { BUTTOM_FIRST, VISIBLE, ZIPPED, rScontainerId } from '../../../src/shared/constant'
 import { generatePaneModel, getInitialVisibility, getSelectListForPaneIds } from '../panes-generator'
 import { ResizablePanes } from 'resizable-panes-react'
 import { DemoHeader } from '../demo-header'
@@ -70,27 +70,37 @@ export const ResizableDemo = () => {
 
   const updateVisibilityMap = (e: any) => {
     const { name, checked } = e
-    const previousVisibilityState = apiRef.current.getVisibilitiesMap()
-    const previousState = previousVisibilityState[name]
+    const previousState = paneVisibilityState[name]
+    
     if (previousState === ZIPPED) {
       apiRef.current.setSize(name, 150, BUTTOM_FIRST)
     } else {
-      const newVisibilityMap = {
-        ...paneVisibilityState,
+
+      const newVisibilityMap : any = {}
+    
+      Object.keys(paneVisibilityState)
+      .forEach(key => {
+        newVisibilityMap[key] = [VISIBLE, ZIPPED].includes(paneVisibilityState[key])
+      })
+
+  
+      apiRef.current.setVisibility({
+        ...newVisibilityMap,
         [name]: checked
-      }
-      apiRef.current.setVisibility(newVisibilityMap)
+      })
     }
   }
 
 
-  console.log(
-    'shouldMountResizable',
-    shouldMountResizable,
-    'initialConfig',
-    initialConfig
-  )
-
+  // console.log(
+  //   'shouldMountResizable',
+  //   shouldMountResizable,
+  //   'initialConfig',
+  //   initialConfig
+  // )
+console.log(
+  'paneVisibilityState', paneVisibilityState
+)
   return (
     <div className='h-100p w-100p px-6' >
 
