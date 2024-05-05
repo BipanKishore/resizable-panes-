@@ -6,24 +6,21 @@ import { PanesCollectionListRatioMode } from "../../shared/pane-model-config-set
 
 
 
-export const InitialConfig = ({ rerenderResizable, formValues,
+export const InitialConfig = ({formValues,
     onBtnChange, onChangeSize, onChangePanesSet,
     setActivePanesSet }: any) => {
 
     const onChangeStorgeApi = (e: any) => {
         onBtnChange(e)
         localStorage.clear()
-        rerenderResizable()
     }
 
     const onToggle = (e: any) => {
         onBtnChange(e)
-        rerenderResizable()
     }
 
     const onTextChange = (e: any) => {
         onChangeSize(e)
-        rerenderResizable()
     }
 
     return <div className='max-w-screen-lg mx-auto rounded-lg'>

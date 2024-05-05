@@ -28,13 +28,13 @@ export const DemoHeader = ({
     }
 
     const onConfirm =() => {
-        onChangePanesSet()
+        rerenderResizable()
+        closeModal()
     }
 
     const onChangeSelect = (newPanesPayload: any) => {
         const {value: {value}} = newPanesPayload
         setActivePanesSet(value)
-        closeModal()
     }
 
     return (
@@ -55,7 +55,6 @@ export const DemoHeader = ({
             >
                 <div className='grid grid-cols-1 gap-20' >
                     <InitialConfig
-                        rerenderResizable={rerenderResizable}
                         formValues={formValues}
                         onBtnChange={onBtnChange}
                         onChangeSize={onChangeSize}

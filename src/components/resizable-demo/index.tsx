@@ -15,15 +15,14 @@ interface IIDMap {
 export const ResizableDemo = () => {
 
   const [activePanesSet, setActivePanesSet] = useState(_4PanesWithMinMax)
-  
   const [paneComponentLists, setPaneComponentLists] = useState(generatePaneModel(activePanesSet))
   const [paneIdsList, setPaneIdsList] = useState(getSelectListForPaneIds(activePanesSet))
   const [paneVisibilityState, setPaneVisibilityState] = useState(getInitialVisibility(activePanesSet))
 
-  const [visibilityMap, setVisibilityMap] = useState<IIDMap>(paneVisibilityState)
-
   const [shouldMountResizable, setSholdMountResizable] = useState(true)
 
+  const [visibilityMap, setVisibilityMap] = useState<IIDMap>(paneVisibilityState)
+  
   const [formValues, setFormValues] = useState<any>(initialResizableFormValues)
 
   const onBtnChange = (e: any) => {
@@ -42,7 +41,7 @@ export const ResizableDemo = () => {
     }))
   }
 
-  const onChangeSize = (e: any)  => {
+  const onChangeSize = (e: any) => {
     const { name, value } = e.target
     setFormValues((preFormValues: any) => ({
       ...preFormValues,
@@ -53,20 +52,13 @@ export const ResizableDemo = () => {
 
   const rerenderResizable = () => {
     setSholdMountResizable(false)
-    setTimeout(() => setSholdMountResizable(true), 1)
-}
-
-  const onChangePanesSet = (newPanesPayload: any) => {
-    setSholdMountResizable(false)
-
-
     const newPaneIdsList = getSelectListForPaneIds(activePanesSet)
     setPaneIdsList(newPaneIdsList)
     const newPaneVisibilityState = getInitialVisibility(activePanesSet)
     setPaneVisibilityState(newPaneVisibilityState)
     const newpPaneComponentLists = generatePaneModel(activePanesSet)
     setPaneComponentLists(newpPaneComponentLists)
-    rerenderResizable()
+    setTimeout(() => setSholdMountResizable(true), 1)
   }
 
 
@@ -78,12 +70,12 @@ export const ResizableDemo = () => {
   const apiRef = useRef<any>({})
 
   const updateVisibilityMap = (e: any) => {
-    const {name, checked} = e
-    const previousVisibilityState =  apiRef.current.getVisibilitiesMap()
+    const { name, checked } = e
+    const previousVisibilityState = apiRef.current.getVisibilitiesMap()
     const previousState = previousVisibilityState[name]
-    if(previousState === 'zipped'){
+    if (previousState === 'zipped') {
       apiRef.current.setSize(name, 150, BUTTOM_FIRST)
-    } else{
+    } else {
       const newVisibilityMap = {
         ...paneVisibilityState,
         [name]: checked
@@ -94,7 +86,7 @@ export const ResizableDemo = () => {
 
   return (
     <div className='h-100p w-100p px-6' >
-      
+
       <DemoHeader
         apiRef={apiRef}
         formValues={formValues}
@@ -103,7 +95,6 @@ export const ResizableDemo = () => {
         onFormChange={onFormChange}
         onChangeSize={onChangeSize}
         onRestore={onRestore}
-        onChangePanesSet={onChangePanesSet}
         rerenderResizable={rerenderResizable}
         setActivePanesSet={setActivePanesSet}
       />
@@ -120,7 +111,7 @@ export const ResizableDemo = () => {
             activeResizerClass=''
             uniqueId={rScontainerId}
             destroyOnHide={formValues.destroyOnHide}
-            resizerClass={`bg-slate-500 ${formValues.vertical ?  'h-5/6 my-auto' : 'w-5/6 mx-auto'}`}
+            resizerClass={`bg-slate-500 ${formValues.vertical ? 'h-5/6 my-auto' : 'w-5/6 mx-auto'}`}
             zipping={formValues.zipping}
             vertical={formValues.vertical}
             storageApi={formValues.storageApi ? localStorage : null}
@@ -136,14 +127,14 @@ export const ResizableDemo = () => {
       <DemoFooter
         selectIdsOption={paneIdsList}
         paneVisibilityState={paneVisibilityState}
-        updateVisibilityMap={updateVisibilityMap} 
-        
+        updateVisibilityMap={updateVisibilityMap}
+
         formValues={formValues}
-        onRestore={onRestore} 
-        onChangeSize={onChangeSize} 
-        apiRef={apiRef} 
-        onBtnChange={onBtnChange}         
-        />
+        onRestore={onRestore}
+        onChangeSize={onChangeSize}
+        apiRef={apiRef}
+        onBtnChange={onBtnChange}
+      />
 
     </div>
   )
