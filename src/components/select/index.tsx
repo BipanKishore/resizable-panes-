@@ -12,15 +12,14 @@ interface ISelect {
     id: string,
     label?: string,
     className?: string,
-    formValues: any,
+    value: any,
     onChange: any,
     list: ISelectList[]
 }
 
 export const Select = (props: ISelect) => {
-    const { id, label, onChange, formValues, list, className } = props
+    const { id, label, value, onChange, list, className } = props
 
-    const _value = formValues[id]
 
     const onChangeSelect = (e: any) => {
         console.log('onChangeSelect', e.target.value)
@@ -39,7 +38,7 @@ export const Select = (props: ISelect) => {
                 {label}
             </label>}
             <select
-                value={_value}
+                value={value}
                 id={id}
                 onChange={onChangeSelect}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -49,7 +48,7 @@ export const Select = (props: ISelect) => {
                         <option
                             className={paneClasses?.zipped}
                             value={label}
-                            selected={label === _value}
+                            selected={label === value}
                         >
                             {label}
                         </option>

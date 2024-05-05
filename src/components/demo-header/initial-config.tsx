@@ -1,23 +1,37 @@
-import React from "react";
 import TextField from "../textfield";
 import { CheckBox } from "../check-box";
 import { Select } from "../select";
 import { PanesCollectionListRatioMode } from "../../shared/pane-model-config-sets";
+import { useState } from "react";
+
+export const InitialConfig = ({
+    onChangeSize, setActivePanesSet 
+}: any) => {
+
+    const [storageApiFlag, setStorageApiFlag] = useState<boolean>(false)
+    const [zipping, setZipping] = useState<boolean>(true)
+    const [unmounOnHide, setUnmounOnHide] = useState(false)
+    const [vertical, setVertical] = useState(true)
+    const [resizerSize, setResizerSize] = useState(1)
 
 
+    const onChangeResizer = (value: string) => {
+        const numValue = Number(value)
+        if (numValue > 0) {
+            setResizerSize(numValue)
+        }
+    }
 
-export const InitialConfig = ({formValues,
-    onBtnChange, onChangeSize, onChangePanesSet,
-    setActivePanesSet }: any) => {
+    const onChangeStorageApiFlag = (flag: boolean) => {
+        setStorageApiFlag(flag)
+    }
+
+
 
     const onChangeStorgeApi = (e: any) => {
-        onBtnChange(e)
         localStorage.clear()
     }
 
-    const onToggle = (e: any) => {
-        onBtnChange(e)
-    }
 
     const onTextChange = (e: any) => {
         onChangeSize(e)
@@ -30,16 +44,17 @@ export const InitialConfig = ({formValues,
                 className="w-full "
                 list={PanesCollectionListRatioMode}
                 id="panesSet"
-                formValues={formValues}
+                value={''}
                 onChange={setActivePanesSet}
             />
 
             <TextField
                 className=''
                 label='Resizer Size'
-                fValue={formValues}
                 name="resizerSize"
-                onChange={onTextChange}
+                onChange={onChangeResizer}
+                value={resizerSize}
+
                 type='number'
             />
 
@@ -47,36 +62,34 @@ export const InitialConfig = ({formValues,
             <CheckBox
                 cyId='btn-zipping'
                 name='zipping'
-                formValues={formValues}
-                onChange={onToggle}
+                value={zipping}
+                onChange={setZipping}
                 label='Zipping'
             />
 
             <CheckBox
                 cyId='btn-zipping'
                 name='destroyOnHide'
-                formValues={formValues}
-                onChange={onToggle}
+                value={unmounOnHide}
+                onChange={setUnmounOnHide}
                 label='Unmount on Hide'
             />
 
             <CheckBox
                 cyId='vertical'
                 name='vertical'
-                formValues={formValues}
-                onChange={onToggle}
+                value={vertical}
+                onChange={setVertical}
                 label='Vertical'
             />
 
             <CheckBox
                 cyId='btn-storage-api'
                 name='storageApi'
-                formValues={formValues}
-                onChange={onChangeStorgeApi}
+                value={storageApiFlag}
+                onChange={onChangeStorageApiFlag}
                 label="Storage Api"
             />
-
-
         </div>
     </div>
 }

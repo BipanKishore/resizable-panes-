@@ -53,13 +53,13 @@ export const ApiOperations = ({ formValues, onBtnChange, apiRef, onChangeSize, o
             />
 
             <div className="flex">
-                <Select
+                {/* <Select
                     className="w-14 inline-flex"
                     list={selectIdsOption}
                     id="paneId"
                     formValues={formValues}
                     onChange={onBtnChange}
-                />
+                /> */}
 
                 <TextField
                     className="inline-flex"
