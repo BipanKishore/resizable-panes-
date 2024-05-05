@@ -98,9 +98,7 @@ export const ResizableDemo = () => {
   //   'initialConfig',
   //   initialConfig
   // )
-console.log(
-  'paneVisibilityState', paneVisibilityState
-)
+
   return (
     <div className='h-100p w-100p px-6' >
 
@@ -140,7 +138,6 @@ console.log(
 
         onRestore={onRestore}
         apiRef={apiRef}
-        
       />
 
     </div>

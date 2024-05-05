@@ -1,33 +1,79 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Button from "../button";
 import TextField from "../textfield";
 import { Select } from "../select";
+import { SET_SIZE_LIST } from "../../shared/constant";
 
-export const ApiOperations = ({ formValues, onBtnChange, apiRef, onChangeSize, onRestore, selectIdsOption }: any) => {
+export const ApiOperations = ({ apiRef, onRestore, selectIdsOption }: any) => {
 
-    const onChangeNumber = (e: any) => {
-        onChangeSize(e)
-        apiRef.current.setSize(formValues.paneId.label, Number(e.target.value))
+    const [newSize, setNewSize] = useState<number | null | ''>('')
+    const [selectedId, setSelectedId] = useState<any>({})
+    const [setSizeBehaviour, setSetSizeBehaviour] = useState(SET_SIZE_LIST[0])
+
+    const onChangeNewSize = () => {
+        console.log(selectedId.label ?? selectIdsOption[0], newSize, setSizeBehaviour)
+        apiRef.current.setSize(selectedId.label ?? selectIdsOption[0], newSize, setSizeBehaviour.value)
+    }
+
+    const updateNewSize = (val: string) => {
+        const numValue = Number(val)
+        if (numValue > 0) {
+            setNewSize(numValue)
+        }
     }
 
     const getState = () => {
-        const state =  apiRef.current.getState()
+        const state = apiRef.current.getState()
         console.log('Current State', state)
     }
-    
+
     const getSizesMap = () => {
         const sizesMap = apiRef.current.getSizesMap()
         console.log('SizesMap', sizesMap)
     }
-    
+
     const getVisibilitiesMap = () => {
         const map = apiRef.current.getVisibilitiesMap()
         console.log('VisibilitiesMap', map)
     }
 
     return <div>
-        <div className="grid grid-cols-6 gap-5 mt-6" >
+
+
+<div className="grid grid-cols-4 gap-4   ">
+                <Select
+                    className=" inline-flex"
+                    list={selectIdsOption}
+                    id="paneId"
+                    value={selectedId}
+                    onChange={setSelectedId}
+                />
+
+                <TextField
+                    className="inline-flex"
+                    value={newSize}
+                    name="newSize"
+                    onChange={updateNewSize}
+                    type='number'
+                />
+
+                <Select
+                    className=" inline-flex"
+                    list={SET_SIZE_LIST}
+                    id="paneId"
+                    value={setSizeBehaviour}
+                    onChange={setSetSizeBehaviour}
+                />
+
+                <Button
+                    onClick={onChangeNewSize}
+                    md
+                    label="Change size"
+                />
+            </div>
+
+        <div className="grid grid-cols-4 gap-5 my-6" >
             <Button
                 cyId='restore-default'
                 onClick={onRestore}
@@ -51,24 +97,6 @@ export const ApiOperations = ({ formValues, onBtnChange, apiRef, onChangeSize, o
                 md
                 label="Get Visibilities Map"
             />
-
-            <div className="flex">
-                {/* <Select
-                    className="w-14 inline-flex"
-                    list={selectIdsOption}
-                    id="paneId"
-                    formValues={formValues}
-                    onChange={onBtnChange}
-                /> */}
-
-                <TextField
-                    className="inline-flex"
-                    fValue={formValues}
-                    name="newSize"
-                    onChange={onChangeNumber}
-                    type='number'
-                />
-            </div>
         </div>
     </div>
 }

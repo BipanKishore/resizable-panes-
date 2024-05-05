@@ -48,8 +48,6 @@ export const BUTTOM_FIRST = 'buttom_first'
 export const TOP_FIRST = 'top_first'
 
 
-
-
 // -------------------------------
 
 export const ON = 'on'
@@ -60,3 +58,19 @@ export const mountUnMountButtonId = 'hide-resizable-panes'
 
 export const loadingId = 'loading'
 export const loadedId = 'loaded'
+
+
+export const SET_SIZE_LIST = [
+  {
+    label: 'Buttom First',
+    value: BUTTOM_FIRST
+  },
+  {
+    label: 'Top First',
+    value: TOP_FIRST
+  },
+  {
+    label: 'Ratio',
+    value: RATIO
+  }
+]

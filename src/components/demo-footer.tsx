@@ -6,32 +6,25 @@ export const DemoFooter = ({
   paneVisibilityState,
   updateVisibilityMap,
   selectIdsOption,
-  formValues,
-  onBtnChange,
-  apiRef,
-  onChangeSize,
-  onRestore,
+  apiRef
 }: any) => {
   return (
-    <div className='grid justify-content-center grid-cols-1  justify-items-center'>
+    <div className='grid justify-content-center grid-cols-1'>
 
-      <div className='mt-10' >
+      <div className='mt-10 justify-self-center' >
         <PanesVisibilityState
           selectIdsOption={selectIdsOption}
           stateMap={paneVisibilityState}
           onClick={updateVisibilityMap} />
+        <div className='font-normal mt-2  text-xs text-slate-500'>
+          These button controls the <span className='font-medium'>
+            visibility prop or setVisibility method</span>
+        </div>
       </div>
-      {/* <div className='font-normal mt-2'>
-        These button controls the <span className='font-medium'>
-          visibility prop or setVisibility method</span>
-      </div> */}
+
 
       <ApiOperations
-        formValues={formValues}
-        onBtnChange={onBtnChange}
         apiRef={apiRef}
-        onChangeSize={onChangeSize}
-        onRestore={onRestore}
         selectIdsOption={selectIdsOption}
       />
     </div>

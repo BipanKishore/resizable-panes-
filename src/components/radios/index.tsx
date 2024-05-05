@@ -3,26 +3,21 @@ import React from "react"
 interface IRatioList  {
     label: string,
     value: any,
-    cyId: string
+    cyId?: string
 }
 
 interface IToggle {
-    formValues: any,
-    name: string,
+    value: any,
     onChange: any,
     list: IRatioList[]
 }
 
-export const Radios = ({ name, formValues, onChange, list }: IToggle) => {
+export const Radios = ({ value, onChange, list }: IToggle) => {
 
-    const selectedValue = formValues[name]
-
+    const selectedValue = value
     const onChangeCheckBox = (e: any) => {
-        const val = e.target.value
-        onChange({
-            name,
-            value: [true, 'true'].includes(val)
-        })
+        const value = e.target.value
+        onChange(value)
     }
 
     return (
@@ -33,7 +28,7 @@ export const Radios = ({ name, formValues, onChange, list }: IToggle) => {
                     <input
                         data-cy={cyId}
                         type="radio" 
-                        checked={value === selectedValue}
+                        checked={value === selectedValue.value}
                         value={value}
                         name={value}
                         onClick={onChangeCheckBox}
