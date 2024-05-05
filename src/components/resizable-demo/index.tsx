@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react'
-import { BORDER_BOTTOM, BORDER_TOP, BUTTOM_FIRST, rScontainerId } from '../../../src/shared/constant'
+import { BUTTOM_FIRST, rScontainerId } from '../../../src/shared/constant'
 import { generatePaneModel, getInitialVisibility, getSelectListForPaneIds } from '../panes-generator'
 import { ResizablePanes } from 'resizable-panes-react'
 import { _4PanesWithMinMax } from '../../shared/pane-model-config-sets'
 import { DemoHeader } from '../demo-header'
 import { DemoFooter } from '../demo-footer'
 import { initialResizableFormValues } from './util'
-import { Modal } from '../modal'
+
 
 interface IIDMap {
   [id: string]: boolean
@@ -72,7 +72,7 @@ export const ResizableDemo = () => {
 
 
   const onRestore = () => {
-    setVisibilityMap(getInitialVisibility(_4PanesWithMinMax))
+    setVisibilityMap(getInitialVisibility(activePanesSet))
     apiRef.current.restoreDefault()
   }
 
