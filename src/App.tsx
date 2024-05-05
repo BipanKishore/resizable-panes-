@@ -3,6 +3,7 @@ import './App.css';
 import { ResizableDemo } from './components/resizable-demo';
 import 'tailwindcss/base.css'
 import Header from './components/header';
+import './components/modal'
 
 function App() {
 
