@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { BUTTOM_FIRST, rScontainerId } from '../../../src/shared/constant'
+import { BUTTOM_FIRST, ZIPPED, rScontainerId } from '../../../src/shared/constant'
 import { generatePaneModel, getInitialVisibility, getSelectListForPaneIds } from '../panes-generator'
 import { ResizablePanes } from 'resizable-panes-react'
 import { _4PanesWithMinMax } from '../../shared/pane-model-config-sets'
@@ -73,7 +73,7 @@ export const ResizableDemo = () => {
     const { name, checked } = e
     const previousVisibilityState = apiRef.current.getVisibilitiesMap()
     const previousState = previousVisibilityState[name]
-    if (previousState === 'zipped') {
+    if (previousState === ZIPPED) {
       apiRef.current.setSize(name, 150, BUTTOM_FIRST)
     } else {
       const newVisibilityMap = {

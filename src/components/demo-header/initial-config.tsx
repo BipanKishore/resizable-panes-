@@ -23,8 +23,8 @@ export const InitialConfig = ({formValues,
         onChangeSize(e)
     }
 
-    return <div className='max-w-screen-lg mx-auto rounded-lg'>
-        <div className="grid grid-cols-4 gap-6" >
+    return <div className=''>
+        <div className="grid grid-cols-2 gap-6" >
             <Select
                 label='Select Panes set'
                 className="w-full "
@@ -35,6 +35,7 @@ export const InitialConfig = ({formValues,
             />
 
             <TextField
+                className=''
                 label='Resizer Size'
                 fValue={formValues}
                 name="resizerSize"

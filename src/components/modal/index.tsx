@@ -1,15 +1,22 @@
 import React, { ReactElement } from 'react';
 import Modal from 'react-modal';
 import Button from '../button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faSquare } from '@fortawesome/free-regular-svg-icons'
+
+
+
 Modal.setAppElement('#root');
 
 
 const customStyles = {
   content: {
-    top: '50%',
+    top: '30%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
+    width: '70%',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
@@ -37,21 +44,30 @@ export function AppModal(props: IAppModal) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <div className='p-4' >
-          <h2 className='text-3xl bold mb-6 '>{title}</h2>
-          <div>
+        <div className='' >
+          <div className='grid grid-cols-2 pb-2 border-solid border-b'>
+            <h2 className='text-3xl bold '>{title}</h2>
+
+            <FontAwesomeIcon
+              icon={faXmark}
+              onClick={closeModal}
+              className='text-2xl text-slate-700 justify-self-end cursor-pointer'
+              size="lg" />
+          </div>
+
+          <div className='my-4' >
             {children}
           </div>
 
-          <div className='float-right'>
-            
+          <div className='border-solid border-t mt-6 pt-4 grid items-center' >
             <Button
-            label='Apply'
-            onClick={onConfirm}
+              className="justify-self-end"
+              label='Apply'
+              onClick={onConfirm}
             >
-
             </Button>
-            </div>
+          </div>
+
         </div>
       </Modal>
     </div>
