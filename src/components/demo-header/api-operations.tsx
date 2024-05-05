@@ -41,37 +41,42 @@ export const ApiOperations = ({ apiRef, onRestore, selectIdsOption }: any) => {
     return <div>
 
 
-<div className="grid grid-cols-4 gap-4   ">
-                <Select
-                    className=" inline-flex"
-                    list={selectIdsOption}
-                    id="paneId"
-                    value={selectedId}
-                    onChange={setSelectedId}
-                />
+        <div className="grid grid-cols-4 gap-4 mt-4">
+            <Select
+                label="Select Pane Id"
+                className="w-full"
+                list={selectIdsOption}
+                id="paneId"
+                value={selectedId}
+                onChange={setSelectedId}
+            />
 
-                <TextField
-                    className="inline-flex"
-                    value={newSize}
-                    name="newSize"
-                    onChange={updateNewSize}
-                    type='number'
-                />
+            <Select
+                className="w-full"
+                label='Set size behaviour'
+                list={SET_SIZE_LIST}
+                id="paneId"
+                value={setSizeBehaviour}
+                onChange={setSetSizeBehaviour}
+            />
 
-                <Select
-                    className=" inline-flex"
-                    list={SET_SIZE_LIST}
-                    id="paneId"
-                    value={setSizeBehaviour}
-                    onChange={setSetSizeBehaviour}
-                />
+            <TextField
+                label='New size'
+                className="inline-flex"
+                value={newSize}
+                name="newSize"
+                onChange={updateNewSize}
+                type='number'
+            />
 
-                <Button
-                    onClick={onChangeNewSize}
-                    md
-                    label="Change size"
-                />
-            </div>
+
+
+            <Button
+                onClick={onChangeNewSize}
+                className='h-5'
+                label="Change size"
+            />
+        </div>
 
         <div className="grid grid-cols-4 gap-5 my-6" >
             <Button

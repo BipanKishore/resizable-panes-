@@ -83,7 +83,7 @@ export const DemoHeader = ({
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6" >
                                 <Select
                                     label='Select Panes set'
-                                    className="w-full "
+                                    className="w-full"
                                     list={PanesCollectionListRatioMode}
                                     id="panesSet"
                                     value={activePanesSet}
