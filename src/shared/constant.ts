@@ -44,7 +44,8 @@ export const RESIZE_HTML_EVENT = 'resize'
 
 
 
-
+export const BUTTOM_FIRST = 'buttom_first'
+export const TOP_FIRST = 'top_first'
 
 
 
