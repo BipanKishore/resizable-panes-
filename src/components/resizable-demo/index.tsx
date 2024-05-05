@@ -6,7 +6,6 @@ import { _4PanesWithMinMax } from '../../shared/pane-model-config-sets'
 import { DemoHeader } from '../demo-header'
 import { DemoFooter } from '../demo-footer'
 import { initialResizableFormValues } from './util'
-import { AppModal } from '../modal'
 
 
 interface IIDMap {
@@ -96,6 +95,7 @@ export const ResizableDemo = () => {
 
   return (
     <div className='h-100p w-100p px-6' >
+      
       <DemoHeader
         apiRef={apiRef}
         formValues={formValues}
@@ -108,7 +108,7 @@ export const ResizableDemo = () => {
         rerenderResizable={rerenderResizable}
       />
 
-      <AppModal />
+
       <div className='h-80 w-100p mt-5'>
         {
           shouldMountResizable &&

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import Modal from 'react-modal';
+Modal.setAppElement('#root');
+
 
 const customStyles = {
   content: {
@@ -12,45 +14,44 @@ const customStyles = {
   },
 };
 
-Modal.setAppElement('#root');
+interface IAppModal {
+  isOpen: boolean,
+  closeModal: any,
+  title: string,
+  children: ReactElement
+}
 
-export function AppModal() {
-  let subtitle: any;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
 
-  function openModal() {
-    setIsOpen(true);
-  }
+export function AppModal(props: IAppModal) {
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
+const {isOpen, 
+  closeModal,
+  title,
+  children
+} = props
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  
+
+
+
+
+
 
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
       <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
+        isOpen={isOpen}
+        onAfterOpen={() => {}}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+        <h2 className='text-xl bold ' >{title}</h2>
         <button onClick={closeModal}>close</button>
         <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
+    <div>
+      {children}
+    </div>
       </Modal>
     </div>
   );
