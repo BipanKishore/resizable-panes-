@@ -31,6 +31,7 @@ export const SizeStateBar = (props: any) => {
   Object.keys(currentSizes).forEach((key, i) =>
     skeleton.push(
       <SkeletonItem
+        key={i + key}
         paneId={key}
         sizeStates={sizeStates}
         currentSizes={currentSizes}

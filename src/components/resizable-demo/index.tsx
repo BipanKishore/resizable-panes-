@@ -117,6 +117,7 @@ export const ResizableDemo = () => {
         {shouldMountResizable && (
           <ResizablePanes
             onResize={setCurrentSizes}
+            onResizeStop={setCurrentSizes}
             onReady={(api) => {
               apiRef.current = api;
             }}
