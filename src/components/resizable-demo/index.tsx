@@ -76,7 +76,7 @@ export const ResizableDemo = () => {
 
   const onRestore = () => {
     setVisibilitiesMap(getInitialVisibility(paneIdsList));
-    apiRef.current.restoreDefault();
+    apiRef.current.restore();
   };
 
   const apiRef = useRef<any>({});

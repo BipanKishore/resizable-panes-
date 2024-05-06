@@ -56,7 +56,7 @@ export const ResizableDemo = (props: any) => {
 
   const onRestore = () => {
     apiRef.current.setVisibilities(initialPaneState)
-    apiRef.current.restoreDefault()
+    apiRef.current.restore()
   }
 
   const apiRef = useRef <any>({})

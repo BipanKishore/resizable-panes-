@@ -30,7 +30,7 @@ export const generatePaneModel = (list: PaneModelConfig[]) => {
       minSize={minSize}
       size={size}
       maxSizeClass={'bg-red-700'}
-      minSizeClass={'bg-blue-700'}
+      minSizeClass={'opacity-50'}
 
       onNormalSize={onNormalSize}
       onMinSize={onMinSize}
