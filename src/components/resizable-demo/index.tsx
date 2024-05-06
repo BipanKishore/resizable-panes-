@@ -12,8 +12,10 @@ import {
 } from "../panes-generator";
 import { ResizablePanes } from "resizable-panes-react";
 import { DemoHeader } from "../demo-header";
-import { DemoFooter } from "../demo-footer";
 import { INITIAL_CONFIG, storageApiFlagKey, storeBooleanKey } from "./util";
+import { SizeStateBar } from "../size-state-bar";
+import { VisibilityButtons } from "../visibility-buttons";
+import { ApiOperations } from "../api-operations";
 
 interface IIDMap {
   [id: string]: boolean;
@@ -28,7 +30,9 @@ export const ResizableDemo = () => {
     getInitialVisibility([])
   );
 
-  const [sizeStates, setSizeState] = useState({})
+  const [sizeStates, setSizeState] = useState({});
+
+  const [currentSizes, setCurrentSizes] = useState({});
 
   const [initialConfig, setInitialConfig] = useState<any>({});
 
@@ -37,27 +41,27 @@ export const ResizableDemo = () => {
   const [visibilityMap, setVisibilitiesMap] =
     useState<IIDMap>(paneVisibilityState);
 
-    const onMaxSize= (id: string, size: number) => {
-      setSizeState((prev) => ({
-        ...prev,
-        [id]: 'Max',
-        [`${id}Size`]: size
-      }))
-    }
-    const onMinSize= (id: string, size: number) => {
-      setSizeState((prev) => ({
-        ...prev,
-        [id]: 'Min',
-        [`${id}Size`]: size
-      }))
-    }
-    const onNormalSize= (id: string) => {
-      setSizeState((prev) => ({
-        ...prev,
-        [id]: '',
-      [`${id}Size`]: null
-      }))
-    }
+  const onMaxSize = (id: string, size: number) => {
+    setSizeState((prev) => ({
+      ...prev,
+      [id]: "Max",
+      [`${id}Size`]: size,
+    }));
+  };
+  const onMinSize = (id: string, size: number) => {
+    setSizeState((prev) => ({
+      ...prev,
+      [id]: "Min",
+      [`${id}Size`]: size,
+    }));
+  };
+  const onNormalSize = (id: string) => {
+    setSizeState((prev) => ({
+      ...prev,
+      [id]: "",
+      [`${id}Size`]: null,
+    }));
+  };
 
   const onUpdateInitalConfig = (
     updatedInitalConfig: any,
@@ -68,10 +72,7 @@ export const ResizableDemo = () => {
     storeBooleanKey(storageApiFlagKey, storageApiFlag);
     setInitialConfig((previousState: any) => {
       if (allowStorageCheck) {
-
-        if (previousState.storageApiFlag !== storageApiFlag) {
-          localStorage.clear();
-        }
+        localStorage.clear();
       }
 
       return {
@@ -91,7 +92,6 @@ export const ResizableDemo = () => {
   };
 
   useEffect(() => {
-    console.log("hhhhhhhhhhhhhhhhhhhhh");
     onUpdateInitalConfig(INITIAL_CONFIG, false);
   }, []);
 
@@ -124,8 +124,6 @@ export const ResizableDemo = () => {
     }
   };
 
-
-
   return (
     <div className="h-100p w-100p px-6">
       <DemoHeader onUpdateInitalConfig={onUpdateInitalConfig} />
@@ -134,6 +132,7 @@ export const ResizableDemo = () => {
         {shouldMountResizable && (
           <ResizablePanes
             visibility={visibilityMap}
+            onResize={setCurrentSizes}
             onReady={(api) => {
               apiRef.current = api;
             }}
@@ -154,14 +153,22 @@ export const ResizableDemo = () => {
         )}
       </div>
 
-      <DemoFooter
+      <div>
+        <SizeStateBar
+          currentSizes={currentSizes}
+          resizerSize={initialConfig.resizerSize}
+          sizeStates={sizeStates}
+        />
+      </div>
+
+      <VisibilityButtons
         selectIdsOption={paneIdsList}
         sizeStates={sizeStates}
         paneVisibilityState={paneVisibilityState}
         updateVisibilityMap={updateVisibilityMap}
-        onRestore={onRestore}
-        apiRef={apiRef}
       />
+
+      <ApiOperations apiRef={apiRef} selectIdsOption={paneIdsList} />
     </div>
   );
 };

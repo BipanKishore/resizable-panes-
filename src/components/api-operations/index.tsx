@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Button from "../button";
-import TextField from "../textfield";
-import { Select } from "../select";
 import { SET_SIZE_LIST } from "../../shared/constant";
+import { Select } from "../form-controls/select";
+import TextField from "../form-controls/textfield";
+import Button from "../form-controls/button";
 
 export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
   const [newSize, setNewSize] = useState<number | null | "">("");
@@ -34,7 +34,7 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
   const onRestore = () => {
     const state = apiRef.current.restore();
     console.log("Current State", state);
-  }
+  };
 
   const getState = () => {
     const state = apiRef.current.getState();

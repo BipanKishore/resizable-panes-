@@ -1,6 +1,7 @@
 import React from 'react'
-import { joinClassName } from '../../../src/shared/utils'
-import { VISIBLE, ZIPPED } from '../../../src/shared/constant'
+import { VISIBLE, ZIPPED } from '../../../shared/constant'
+import { joinClassName } from '../../../shared/utils'
+
 
 
 const stateClass: any = {
@@ -22,7 +23,7 @@ export const MultiStateButton = ({ name, className, statesClass, state, onClick,
 
   const className1 = joinClassName({
     [className]: true,
-    ' md:font-bold md:py-2 md:px-4 md:mx-4 mx-2 px-2 rounded border-solid border-b-4': true,
+    ' md:font-bold md:py-1 md:px-4 md:mx-4 mx-2 px-2 rounded border-solid border-b-4': true,
     [stateClass[state]]: true
   })
 
@@ -30,32 +31,28 @@ export const MultiStateButton = ({ name, className, statesClass, state, onClick,
   const secondryLabelSize = sizeStates[name + 'Size']
 
   const secondryLabelClass = joinClassName({
+    'text-xs': true,
     'text-blue-700': secondryLabel === 'Min',
     'text-red-700': secondryLabel === 'Max',
   })
 
   return (
+    
     <button
       className={className1}
       data-cy={`checkbox-${name}`}
       onClick={onClickBtn}
     >
       {label || name}
-      <div className={secondryLabelClass}>
+      {/* <div className={secondryLabelClass}>
         <div >{secondryLabel}
         </div>
         <div>{secondryLabelSize}</div>
-      </div>
+      </div> */}
     </button>
+    
   )
 }
 
-export const isOn = (value: string) => value === 'on'
 
-const statesClassOrange = {
-  on: 'bg-teal-500',
-  off: 'bg-teal-100'
-}
-
-type IOnOff = 'on' | 'off'
 

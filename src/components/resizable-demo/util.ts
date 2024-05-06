@@ -14,16 +14,6 @@ export const INITIAL_CONFIG = {
   vertical: true,
   unmounOnHide: true,
   storageApiFlag: getSstorageApiFlagValue(storageApiFlagKey),
-  resizerSize: 1,
+  resizerSize: 2,
   activePanesSet: PanesCollectionListRatioMode[5].value
 }
-
-export const initialResizableFormValues = {
-    paneId: 'P0',
-    newSize: 0,
-    zipping: true,
-    vertical: true,
-    destroyOnHide: true,
-    storageApi: false,
-    resizerSize: 1
-  }

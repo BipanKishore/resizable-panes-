@@ -1,5 +1,5 @@
 import React from "react";
-import { IPaneBgClass } from "../../shared/types";
+import { IPaneBgClass } from "../../../shared/types";
 
 export interface ISelectList {
   label: string;
