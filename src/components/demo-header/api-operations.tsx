@@ -4,7 +4,7 @@ import TextField from "../textfield";
 import { Select } from "../select";
 import { SET_SIZE_LIST } from "../../shared/constant";
 
-export const ApiOperations = ({ apiRef, onRestore, selectIdsOption }: any) => {
+export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
   const [newSize, setNewSize] = useState<number | null | "">("");
   const [selectedId, setSelectedId] = useState<any>({});
   const [setSizeBehaviour, setSetSizeBehaviour] = useState(SET_SIZE_LIST[0]);
@@ -30,6 +30,11 @@ export const ApiOperations = ({ apiRef, onRestore, selectIdsOption }: any) => {
       setNewSize("");
     }
   };
+
+  const onRestore = () => {
+    const state = apiRef.current.restore();
+    console.log("Current State", state);
+  }
 
   const getState = () => {
     const state = apiRef.current.getState();
