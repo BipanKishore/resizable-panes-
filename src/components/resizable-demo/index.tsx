@@ -17,10 +17,6 @@ import { SizeStateBar } from "../size-state-bar";
 import { VisibilityButtons } from "../visibility-buttons";
 import { ApiOperations } from "../api-operations";
 
-interface IIDMap {
-  [id: string]: boolean;
-}
-
 export const ResizableDemo = () => {
   const [paneComponentLists, setPaneComponentLists] = useState(
     generatePaneModel([])
@@ -38,28 +34,22 @@ export const ResizableDemo = () => {
 
   const [shouldMountResizable, setSholdMountResizable] = useState(false);
 
-  const [visibilityMap, setVisibilitiesMap] =
-    useState<IIDMap>(paneVisibilityState);
-
-  const onMaxSize = (id: string, size: number) => {
+  const onMaxSize = (id: string) => {
     setSizeState((prev) => ({
       ...prev,
       [id]: "Max",
-      [`${id}Size`]: size,
     }));
   };
-  const onMinSize = (id: string, size: number) => {
+  const onMinSize = (id: string) => {
     setSizeState((prev) => ({
       ...prev,
       [id]: "Min",
-      [`${id}Size`]: size,
     }));
   };
   const onNormalSize = (id: string) => {
     setSizeState((prev) => ({
       ...prev,
       [id]: "",
-      [`${id}Size`]: null,
     }));
   };
 
@@ -95,11 +85,6 @@ export const ResizableDemo = () => {
     onUpdateInitalConfig(INITIAL_CONFIG, false);
   }, []);
 
-  const onRestore = () => {
-    setVisibilitiesMap(getInitialVisibility(paneIdsList));
-    apiRef.current.restore();
-  };
-
   const apiRef = useRef<any>({});
 
   const updateVisibilityMap = (e: any) => {
@@ -131,7 +116,6 @@ export const ResizableDemo = () => {
       <div className="h-80 w-100p mt-5">
         {shouldMountResizable && (
           <ResizablePanes
-            visibility={visibilityMap}
             onResize={setCurrentSizes}
             onReady={(api) => {
               apiRef.current = api;
