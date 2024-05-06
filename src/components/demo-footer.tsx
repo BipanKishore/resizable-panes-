@@ -6,13 +6,15 @@ export const DemoFooter = ({
   paneVisibilityState,
   updateVisibilityMap,
   selectIdsOption,
-  apiRef
+  apiRef,
+   sizeStates
 }: any) => {
   return (
     <div className='grid justify-content-center grid-cols-1'>
 
       <div className='mt-10 justify-self-center' >
         <PanesVisibilityState
+        sizeStates={sizeStates}
           selectIdsOption={selectIdsOption}
           stateMap={paneVisibilityState}
           onClick={updateVisibilityMap} />
