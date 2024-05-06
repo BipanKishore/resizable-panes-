@@ -55,7 +55,7 @@ export const ResizableDemo = (props: any) => {
 
 
   const onRestore = () => {
-    apiRef.current.setVisibility(initialPaneState)
+    apiRef.current.setVisibilities(initialPaneState)
     apiRef.current.restoreDefault()
   }
 
@@ -72,7 +72,7 @@ export const ResizableDemo = (props: any) => {
       ...paneVisibilityState,
       [name]: checked
     }
-    apiRef.current.setVisibility(newVisibilityMap)
+    apiRef.current.setVisibilities(newVisibilityMap)
     if(previousState === 'zipped'){
       console.log(previousState, previousState, previousState)
       apiRef.current.setSize(name, 100)

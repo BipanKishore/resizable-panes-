@@ -18,7 +18,7 @@ export const DemoFooter = ({
           onClick={updateVisibilityMap} />
         <div className='font-normal mt-2  text-xs text-slate-500'>
           These button controls the <span className='font-medium'>
-            visibility prop or setVisibility method</span>
+            visibility prop or setVisibilities method</span>
         </div>
       </div>
 

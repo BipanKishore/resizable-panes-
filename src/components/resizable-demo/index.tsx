@@ -31,7 +31,7 @@ export const ResizableDemo = () => {
 
   const [shouldMountResizable, setSholdMountResizable] = useState(false);
 
-  const [visibilityMap, setVisibilityMap] =
+  const [visibilityMap, setVisibilitiesMap] =
     useState<IIDMap>(paneVisibilityState);
 
   const onUpdateInitalConfig = (
@@ -75,7 +75,7 @@ export const ResizableDemo = () => {
   }, []);
 
   const onRestore = () => {
-    setVisibilityMap(getInitialVisibility(paneIdsList));
+    setVisibilitiesMap(getInitialVisibility(paneIdsList));
     apiRef.current.restoreDefault();
   };
 
@@ -96,7 +96,7 @@ export const ResizableDemo = () => {
         );
       });
 
-      apiRef.current.setVisibility({
+      apiRef.current.setVisibilities({
         ...newVisibilityMap,
         [name]: checked,
       });
