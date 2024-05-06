@@ -27,12 +27,37 @@ export const ResizableDemo = () => {
   const [paneVisibilityState, setPaneVisibilityState] = useState(
     getInitialVisibility([])
   );
+
+  const [sizeStates, setSizeState] = useState({})
+
   const [initialConfig, setInitialConfig] = useState<any>({});
 
   const [shouldMountResizable, setSholdMountResizable] = useState(false);
 
   const [visibilityMap, setVisibilitiesMap] =
     useState<IIDMap>(paneVisibilityState);
+
+    const onMaxSize= (id: string, size: number) => {
+      setSizeState((prev) => ({
+        ...prev,
+        [id]: 'Max',
+        [`${id}Size`]: size
+      }))
+    }
+    const onMinSize= (id: string, size: number) => {
+      setSizeState((prev) => ({
+        ...prev,
+        [id]: 'Min',
+        [`${id}Size`]: size
+      }))
+    }
+    const onNormalSize= (id: string) => {
+      setSizeState((prev) => ({
+        ...prev,
+        [id]: '',
+      [`${id}Size`]: null
+      }))
+    }
 
   const onUpdateInitalConfig = (
     updatedInitalConfig: any,
@@ -41,13 +66,9 @@ export const ResizableDemo = () => {
     const { activePanesSet, storageApiFlag } = updatedInitalConfig;
 
     storeBooleanKey(storageApiFlagKey, storageApiFlag);
-    console.log("-----------------------------------------", allowStorageCheck);
     setInitialConfig((previousState: any) => {
       if (allowStorageCheck) {
-        console.log(
-          "-----------------------------------------",
-          allowStorageCheck
-        );
+
         if (previousState.storageApiFlag !== storageApiFlag) {
           localStorage.clear();
         }
@@ -103,12 +124,7 @@ export const ResizableDemo = () => {
     }
   };
 
-  // console.log(
-  //   'shouldMountResizable',
-  //   shouldMountResizable,
-  //   'initialConfig',
-  //   initialConfig
-  // )
+
 
   return (
     <div className="h-100p w-100p px-6">
@@ -129,6 +145,9 @@ export const ResizableDemo = () => {
               initialConfig.vertical ? "h-5/6 my-auto" : "w-5/6 mx-auto"
             }`}
             onChangeVisibility={setPaneVisibilityState}
+            onMaxSize={onMaxSize}
+            onMinSize={onMinSize}
+            onNormalSize={onNormalSize}
           >
             {paneComponentLists}
           </ResizablePanes>
@@ -137,6 +156,7 @@ export const ResizableDemo = () => {
 
       <DemoFooter
         selectIdsOption={paneIdsList}
+        sizeStates={sizeStates}
         paneVisibilityState={paneVisibilityState}
         updateVisibilityMap={updateVisibilityMap}
         onRestore={onRestore}

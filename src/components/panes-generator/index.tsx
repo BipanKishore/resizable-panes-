@@ -31,9 +31,7 @@ export const generatePaneModel = (list: PaneModelConfig[]) => {
       maxSizeClass={'bg-red-700'}
       minSizeClass={'bg-blue-700'}
 
-      onNormalSize={onNormalSize}
-      onMinSize={onMinSize}
-      onMaxSize={onMaxSize}
+
     >
       <div className="mt-8 text-slate-700">
         {<h2>{`P${index}`}</h2>}

@@ -11,7 +11,7 @@ const stateClass: any = {
   visible: 'text-green-900 border-green-900',
 }
 
-export const MultiStateButton = ({name, className, statesClass, state, onClick, label}: any) => {
+export const MultiStateButton = ({ name, className, statesClass, state, onClick, label, sizeStates }: any) => {
   const onClickBtn = () => {
     const newState = ![VISIBLE, ZIPPED].includes(state)
     onClick({
@@ -26,13 +26,26 @@ export const MultiStateButton = ({name, className, statesClass, state, onClick, 
     [stateClass[state]]: true
   })
 
+  const secondryLabel = sizeStates[name]
+  const secondryLabelSize = sizeStates[name + 'Size']
+
+  const secondryLabelClass = joinClassName({
+    'text-blue-700': secondryLabel === 'Min',
+    'text-red-700': secondryLabel === 'Max',
+  })
+
   return (
     <button
       className={className1}
       data-cy={`checkbox-${name}`}
       onClick={onClickBtn}
     >
-      {label || name }
+      {label || name}
+      <div className={secondryLabelClass}>
+        <div >{secondryLabel}
+        </div>
+        <div>{secondryLabelSize}</div>
+      </div>
     </button>
   )
 }
@@ -46,27 +59,3 @@ const statesClassOrange = {
 
 type IOnOff = 'on' | 'off'
 
-export const MultiStateButtonTealOnOff = ({cyId, name, onClick, state, label}: any) => {
-  const onClickBtn = () => {
-    onClick({
-      name,
-      value: state === 'on' ? 'off' : 'on'
-    })
-  }
-  const stateClass = statesClassOrange[state as IOnOff]
-
-  const className = joinClassName({
-    ' font-medium rounded mx-4 p-1': true,
-    [stateClass]: true
-  })
-
-  return (
-    <button
-      className={className}
-      data-cy={`${cyId}`}
-      onClick={onClickBtn}
-    >
-      {label}
-    </button>
-  )
-}
