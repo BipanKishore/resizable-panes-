@@ -41,8 +41,8 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
     console.log("Current State", state);
   };
 
-  const getSizesMap = () => {
-    const sizesMap = apiRef.current.getSizesMap();
+  const getSizes = () => {
+    const sizesMap = apiRef.current.getSizes();
     console.log("SizesMap", sizesMap);
   };
 
@@ -91,7 +91,7 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
       <div className="grid mt-4 p-4 border rounded-lg gap-7 ">
         <Button onClick={onRestore} label="Restore" />
         <Button onClick={getState} md label="Get State" />
-        <Button onClick={getSizesMap} label="Get sizes" />
+        <Button onClick={getSizes} label="Get sizes" />
         <Button onClick={getVisibilitiesMap} label="Get visibilities" />
       </div>
     </div>
