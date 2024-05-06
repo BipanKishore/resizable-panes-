@@ -1,6 +1,6 @@
 import { Pane } from "resizable-panes-react";
 import { PaneModelConfig } from "../../../src/shared/models";
-import React, { useState } from "react";
+import React from "react";
 import { Loading } from "../Loading";
 import { ISelectList } from "../select";
 import { paneClasses } from "./pane-css";
@@ -10,7 +10,6 @@ import { paneClasses } from "./pane-css";
 export const generatePaneModel = (list: PaneModelConfig[]) => {
   const paneComponentLists = list.map(({ size, minSize, maxSize }, index) => {
 
-    
     const onNormalSize =(id: string) => {
       console.log('v-- onNormalSize', id)
     }
@@ -42,7 +41,6 @@ export const generatePaneModel = (list: PaneModelConfig[]) => {
       </div>
     </Pane>
     )
-
   }
 
   );
