@@ -19,6 +19,7 @@ import { VisibilityButtons } from "../visibility-buttons";
 import { ApiOperations } from "../api-operations";
 import { findePanesSet } from "../../shared/pane-model-config-sets";
 import { PaneModelConfig } from "../../shared/models";
+import { SetSize } from "../api-operations/set-size";
 
 export const ResizableDemo = () => {
   const [initialConfig, setInitialConfig] = useState<any>(getInitialConfig());
@@ -173,8 +174,10 @@ export const ResizableDemo = () => {
         paneVisibilityState={paneVisibilityState}
         updateVisibilityMap={updateVisibilityMap}
       />
-
-      <ApiOperations apiRef={apiRef} selectIdsOption={paneIdsList} />
+      <div className="grid grid-cols-2 mt-4">
+        <ApiOperations apiRef={apiRef} selectIdsOption={paneIdsList} />
+        <SetSize apiRef={apiRef} selectIdsOption={paneIdsList}  />
+      </div>
     </div>
   );
 };

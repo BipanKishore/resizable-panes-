@@ -18,12 +18,13 @@ export default function TextField(props) {
   return (
     <div className={`${className}`}>
       <div>
-        <label
+   {label &&     <label
           htmlFor={id}
           className="block mb-2 text-sm font-medium text-gray-900"
         >
           {label}
         </label>
+        }
         <input
           value={value}
           onChange={onTextChange}
