@@ -29,11 +29,14 @@ export const SetSize = ({ apiRef, selectIdsOption }: any) => {
   };
 
   return (
-    <div>
- <div className="p-2 flex justify-center">
-        <Select
+
+    <div className="w-10/12 md:w-full justify-self-center md:justify-self-end">
+      <div className="p-2 grid md:gap-1 md:flex justify-end">
+        <div className="">
+          <div className="grid gap-4 md:flex">
+          <Select
           valueKey="value"
-          className="mr-2"
+          className=""
           list={selectIdsOption}
           id="paneId"
           value={selectedId}
@@ -41,7 +44,7 @@ export const SetSize = ({ apiRef, selectIdsOption }: any) => {
         />
 
         <Select
-          className="mr-2"
+          className=""
           list={SET_SIZE_LIST}
           id="paneId"
           valueKey="value"
@@ -50,7 +53,7 @@ export const SetSize = ({ apiRef, selectIdsOption }: any) => {
         />
 
         <TextField
-          className="mr-2"
+          className=""
           placeholder="Size"
           value={newSize}
           name="newSize"
@@ -58,11 +61,14 @@ export const SetSize = ({ apiRef, selectIdsOption }: any) => {
           type="number"
         />
 
-        <Button className="mt-1" onClick={onChangeNewSize} label="Change" />
-      </div>
-      <div className="font-normal mt-2 text-center text-xs text-slate-500">
-      It controls Resizable api's setSize method.
+        <Button className="mt-0" onClick={onChangeNewSize} label="Change" />
+          </div>
+          <div className="font-normal w-full mt-2 text-center text-xs text-slate-500">
+          It controls Resizable api's setSize method.
+          </div>
+        </div>
       </div>
     </div>
+
   );
 };

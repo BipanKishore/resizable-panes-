@@ -13,7 +13,6 @@ const customStyles = {
     left: "50%",
     right: "auto",
     bottom: "auto",
-    width: "70%",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
   },
@@ -39,7 +38,7 @@ export function AppModal(props: IAppModal) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <div className="">
+        <div className="modal-width">
           <div className="grid grid-cols-2 pb-2 border-solid border-b">
             <h2 className="text-3xl bold ">{title}</h2>
 

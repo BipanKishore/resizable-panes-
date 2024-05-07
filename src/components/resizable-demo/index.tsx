@@ -126,6 +126,10 @@ export const ResizableDemo = () => {
     }
   };
 
+  const vertical = initialConfig.vertical
+
+
+
   return (
     <div className="h-100p w-100p px-6">
       <DemoHeader
@@ -133,51 +137,55 @@ export const ResizableDemo = () => {
         onUpdateInitalConfig={onUpdateInitalConfig}
       />
 
-      <div className="h-96 w-100p mt-5">
-        {shouldMountResizable && (
-          <ResizablePanes
-            onResize={setCurrentSizes}
-            onResizeStop={setCurrentSizes}
-            onReady={(api) => {
-              apiRef.current = api;
-            }}
-            activeResizerClass=""
-            storageApi={initialConfig.storageApiFlag ? sessionStorage : null}
-            uniqueId={initialConfig.activePanesSet}
-            unmounOnHide={initialConfig.unmounOnHide}
-            {...initialConfig}
-            resizerClass={`bg-slate-400 ${
-              initialConfig.vertical ? "h-5/6 my-auto" : "w-5/6 mx-auto"
-            }`}
-            className="justify-center"
-            onChangeVisibility={setPaneVisibilityState}
-            onMaxSize={onMaxSize}
-            onMinSize={onMinSize}
-            onNormalSize={onNormalSize}
-          >
-            {paneComponentLists}
-          </ResizablePanes>
-        )}
-      </div>
+<div className="h-96 w-100p mt-5">
+          {shouldMountResizable && (
+            <ResizablePanes
+              onResize={setCurrentSizes}
+              onResizeStop={setCurrentSizes}
+              onReady={(api: any) => {
+                apiRef.current = api;
+              }}
+              activeResizerClass=""
+              storageApi={initialConfig.storageApiFlag ? sessionStorage : null}
+              uniqueId={initialConfig.activePanesSet}
+              unmounOnHide={initialConfig.unmounOnHide}
+              {...initialConfig}
+              resizerClass={`bg-slate-400 ${
+                vertical ? "h-5/6 my-auto" : "w-5/6 mx-auto"
+              }`}
+              className="justify-center"
+              onChangeVisibility={setPaneVisibilityState}
+              onMaxSize={onMaxSize}
+              onMinSize={onMinSize}
+              onNormalSize={onNormalSize}
+            >
+              {paneComponentLists}
+            </ResizablePanes>
+          )}
+        </div>
 
-      <div>
-        <SizeStateBar
-          currentSizes={currentSizes}
-          resizerSize={initialConfig.resizerSize}
-          sizeStates={sizeStates}
-        />
-      </div>
-
+        <div>
+          {
+            vertical &&
+            <SizeStateBar
+            currentSizes={currentSizes}
+            resizerSize={initialConfig.resizerSize}
+            sizeStates={sizeStates}
+          />
+          }
+    
+        </div>
       <VisibilityButtons
         selectIdsOption={paneIdsList}
         sizeStates={sizeStates}
         paneVisibilityState={paneVisibilityState}
         updateVisibilityMap={updateVisibilityMap}
       />
-      <div className="grid grid-cols-2 mt-4">
+      <div className="grid grid-cols-2 mt-6">
         <ApiOperations apiRef={apiRef} selectIdsOption={paneIdsList} />
-        <SetSize apiRef={apiRef} selectIdsOption={paneIdsList}  />
+        <SetSize apiRef={apiRef} selectIdsOption={paneIdsList} />
       </div>
+      <div className=" pb-10"></div>
     </div>
   );
 };
