@@ -64,7 +64,7 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
 
         <Select
           className="w-full"
-          label="Set size behaviour"
+          label="Behaviour"
           list={SET_SIZE_LIST}
           id="paneId"
           value={setSizeBehaviour}
@@ -72,7 +72,7 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
         />
 
         <TextField
-          label="New size"
+          label="Size"
           value={newSize}
           name="newSize"
           onChange={updateNewSize}
@@ -82,7 +82,7 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
         <Button
           className="mt-3"
           onClick={onChangeNewSize}
-          label="Change size"
+          label="Change"
         />
       </div>
       <div></div>

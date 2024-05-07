@@ -1,11 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  BUTTOM_FIRST,
-  VISIBLE,
-  ZIPPED
-} from "../../../src/shared/constant";
+import { BUTTOM_FIRST, VISIBLE, ZIPPED } from "../../../src/shared/constant";
 
-import isEqual from 'lodash/isEqual';
+import isEqual from "lodash/isEqual";
 import {
   generatePaneModel,
   getInitialVisibility,
@@ -13,7 +9,11 @@ import {
 } from "../panes-generator";
 import { ResizablePanes } from "resizable-panes-react";
 import { DemoHeader } from "../demo-header";
-import { clearAllResizableComponentData, getInitialConfig, storeInitialConfig } from "./util";
+import {
+  clearAllResizableComponentData,
+  getInitialConfig,
+  storeInitialConfig,
+} from "./util";
 import { SizeStateBar } from "../size-state-bar";
 import { VisibilityButtons } from "../visibility-buttons";
 import { ApiOperations } from "../api-operations";
@@ -21,19 +21,21 @@ import { findePanesSet } from "../../shared/pane-model-config-sets";
 import { PaneModelConfig } from "../../shared/models";
 
 export const ResizableDemo = () => {
-  
   const [initialConfig, setInitialConfig] = useState<any>(getInitialConfig());
 
-  const [paneComponentLists, setPaneComponentLists] = useState(generatePaneModel([]));
+  const [paneComponentLists, setPaneComponentLists] = useState(
+    generatePaneModel([])
+  );
 
   const [paneIdsList, setPaneIdsList] = useState(getSelectListForPaneIds([]));
 
-  const [paneVisibilityState, setPaneVisibilityState] = useState(getInitialVisibility([]));
+  const [paneVisibilityState, setPaneVisibilityState] = useState(
+    getInitialVisibility([])
+  );
 
   const [sizeStates, setSizeState] = useState({});
 
   const [currentSizes, setCurrentSizes] = useState({});
-
 
   const [shouldMountResizable, setSholdMountResizable] = useState(false);
 
@@ -56,40 +58,35 @@ export const ResizableDemo = () => {
     }));
   };
 
-  const onUpdateInitalConfig = (
-    updatedInitalConfig: any
-  ) => {
-    const { activePanesSet} = updatedInitalConfig;
+  const onUpdateInitalConfig = (updatedInitalConfig: any) => {
+    const { activePanesSet } = updatedInitalConfig;
 
-    const newPanesSet = findePanesSet(activePanesSet) as PaneModelConfig[]
+    const newPanesSet = findePanesSet(activePanesSet) as PaneModelConfig[];
 
     setInitialConfig((previousConfig: any) => {
       const initialConfigClone = {
-        ...previousConfig
-      }
+        ...previousConfig,
+      };
 
       const updatedInitalConfigClone = {
-        ...updatedInitalConfig
+        ...updatedInitalConfig,
+      };
+
+      delete initialConfigClone.activePanesSet;
+      delete updatedInitalConfigClone.activePanesSet;
+
+      if (!isEqual(initialConfigClone, updatedInitalConfigClone)) {
+        console.log(initialConfigClone, updatedInitalConfigClone);
+        clearAllResizableComponentData();
       }
 
-      delete initialConfigClone.activePanesSet
-      delete updatedInitalConfigClone.activePanesSet
-
-      if(!isEqual(initialConfigClone, updatedInitalConfigClone)) {
-        console.log(
-          initialConfigClone,
-updatedInitalConfigClone
-        )
-        clearAllResizableComponentData()
-      }
-      
       return {
         ...updatedInitalConfig,
       };
     });
-    storeInitialConfig(updatedInitalConfig)
+    storeInitialConfig(updatedInitalConfig);
 
-    setSizeState({})
+    setSizeState({});
     setSholdMountResizable(false);
     const newPaneIdsList = getSelectListForPaneIds(newPanesSet);
     setPaneIdsList(newPaneIdsList);
@@ -130,7 +127,10 @@ updatedInitalConfigClone
 
   return (
     <div className="h-100p w-100p px-6">
-      <DemoHeader initialConfig={initialConfig} onUpdateInitalConfig={onUpdateInitalConfig} />
+      <DemoHeader
+        initialConfig={initialConfig}
+        onUpdateInitalConfig={onUpdateInitalConfig}
+      />
 
       <div className="h-96 w-100p mt-5">
         {shouldMountResizable && (
@@ -145,7 +145,7 @@ updatedInitalConfigClone
             uniqueId={initialConfig.activePanesSet}
             unmounOnHide={initialConfig.unmounOnHide}
             {...initialConfig}
-            resizerClass={`bg-slate-500 ${
+            resizerClass={`bg-slate-400 ${
               initialConfig.vertical ? "h-5/6 my-auto" : "w-5/6 mx-auto"
             }`}
             className="justify-center"

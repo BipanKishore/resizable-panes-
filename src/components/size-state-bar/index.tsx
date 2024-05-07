@@ -3,9 +3,9 @@ import { joinClassName } from "../../shared/utils";
 
 const SkeletonItem = ({ sizeStates, currentSizes, paneId }: any) => {
   const className = joinClassName({
-    "text-xs text-center text-xs font-bold": true,
-    "text-blue-700": sizeStates[paneId] === "Min",
-    "text-red-700": sizeStates[paneId] === "Max",
+    "text-xs text-center text-sm font-bold": true,
+    "text-blue-600": sizeStates[paneId] === "Min",
+    "text-red-600": sizeStates[paneId] === "Max",
     "text-slate-600": !["Min", "Max", ""].includes(sizeStates[paneId]),
   });
 
