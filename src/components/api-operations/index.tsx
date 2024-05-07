@@ -6,19 +6,19 @@ import Button from "../form-controls/button";
 
 export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
   const [newSize, setNewSize] = useState<number | null | "">("");
-  const [selectedId, setSelectedId] = useState<any>({});
-  const [setSizeBehaviour, setSetSizeBehaviour] = useState(SET_SIZE_LIST[0]);
+  const [selectedId, setSelectedId] = useState<any>(SET_SIZE_LIST[0].label);
+  const [setSizeBehaviour, setSetSizeBehaviour] = useState(SET_SIZE_LIST[0].label);
 
   const onChangeNewSize = () => {
     console.log(
-      selectedId.label ?? selectIdsOption[0],
+      selectedId,
       newSize,
       setSizeBehaviour
     );
     apiRef.current.setSize(
-      selectedId.label ?? selectIdsOption[0],
+      selectedId,
       newSize,
-      setSizeBehaviour.value
+      setSizeBehaviour
     );
   };
 
@@ -46,7 +46,7 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
   };
 
   const getVisibilitiesMap = () => {
-    const map = apiRef.current.getVisibilitiesMap();
+    const map = apiRef.current.getVisibilities();
     console.log("VisibilitiesMap", map);
   };
 
@@ -62,14 +62,14 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
           onChange={setSelectedId}
         />
 
-        {/* <Select
+        <Select
           className="w-full"
           label="Set size behaviour"
           list={SET_SIZE_LIST}
           id="paneId"
           value={setSizeBehaviour}
           onChange={setSetSizeBehaviour}
-        /> */}
+        />
 
         <TextField
           label="New size"

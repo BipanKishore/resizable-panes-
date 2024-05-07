@@ -16,7 +16,7 @@ const SkeletonItem = ({ sizeStates, currentSizes, paneId }: any) => {
         width: `${currentSizes[paneId]}px`,
       }}
     >
-      {currentSizes[paneId] !== 0 ? currentSizes[paneId] : ""}
+      {currentSizes[paneId] !== 0 ?  parseInt(currentSizes[paneId]) : ""}
     </div>
   );
 };
@@ -43,6 +43,6 @@ export const SizeStateBar = (props: any) => {
     )
   );
   skeleton.pop();
-
-  return <div className="flex mt-1 h-4">{skeleton}</div>;
+  
+  return <div className="flex mt-1 h-4 justify-center">{skeleton}</div>;
 };

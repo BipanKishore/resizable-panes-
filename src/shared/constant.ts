@@ -44,8 +44,7 @@ export const RESIZE_HTML_EVENT = 'resize'
 
 
 
-export const BUTTOM_FIRST = 'buttom_first'
-export const TOP_FIRST = 'top_first'
+
 
 
 // -------------------------------
@@ -59,7 +58,8 @@ export const mountUnMountButtonId = 'hide-resizable-panes'
 export const loadingId = 'loading'
 export const loadedId = 'loaded'
 
-
+export const BUTTOM_FIRST = 'buttomFirst'
+export const TOP_FIRST = 'topFirst'
 export const SET_SIZE_LIST = [
   {
     label: 'Buttom First',

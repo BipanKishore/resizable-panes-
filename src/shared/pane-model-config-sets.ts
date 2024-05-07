@@ -22,10 +22,10 @@ export const _3PanesWithMinMax = [
 ]
 
 export const _4PanesWithMinMax = [
-  new PaneModelConfig(1, 0.1, 3),
+  new PaneModelConfig(1, 0.5, 3),
   new PaneModelConfig(3, 1),
   new PaneModelConfig(3, 1),
-  new PaneModelConfig(1, 0.1, 3)
+  new PaneModelConfig(1, 0.5, 3)
 ]
 
 export const _4PanesWithNoMinMax = [
@@ -36,11 +36,11 @@ export const _4PanesWithNoMinMax = [
 ]
 
 export const _5PanesWithMinMax = [
-  new PaneModelConfig(1, 0.1, 3),
+  new PaneModelConfig(1, 0.6, 3),
   new PaneModelConfig(3, 1),
   new PaneModelConfig(2, 1, 3),
   new PaneModelConfig(3, 1),
-  new PaneModelConfig(1, 0.1, 3)
+  new PaneModelConfig(1, 0.6, 3)
 ]
 
 export const _5PanesWithNoMinMax = [

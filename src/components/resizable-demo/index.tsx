@@ -148,6 +148,7 @@ updatedInitalConfigClone
             resizerClass={`bg-slate-500 ${
               initialConfig.vertical ? "h-5/6 my-auto" : "w-5/6 mx-auto"
             }`}
+            className="justify-center"
             onChangeVisibility={setPaneVisibilityState}
             onMaxSize={onMaxSize}
             onMinSize={onMinSize}

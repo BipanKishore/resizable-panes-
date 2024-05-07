@@ -28,7 +28,9 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
   const [unmounOnHide, setUnmounOnHide] = useState(initialConfig.unmounOnHide);
   const [vertical, setVertical] = useState(initialConfig.vertical);
   const [resizerSize, setResizerSize] = useState(initialConfig.resizerSize);
-  const [activePanesSet, setActivePanesSet] = useState(initialConfig.activePanesSet);
+  const [activePanesSet, setActivePanesSet] = useState(
+    initialConfig.activePanesSet
+  );
 
   const onConfirm = () => {
     const updatedInitalConfig = {
@@ -57,10 +59,25 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
 
   return (
     <div>
-      <h1>
-        The <a className="text-blue-600" href={NPM_URL}>resizable-panes-react</a> is highly customizable and can be used in various
-        applications where flexible layout system is required.
-      </h1>
+      <div>
+        <div className="text-2xl" >
+          Why to use{" "}
+          <a className="text-blue-600" href={NPM_URL}>
+            resizable-panes-react
+          </a>
+          :
+        </div>
+        <div className="text-orange-600">
+          <p >
+            - In build api methods to control visibility, resizing of panes and
+            to get state of panes.
+          </p>
+          <p>
+            - No Unnecessary Rerenderring while resizing and visibility operations and can keep component rendered in hidden state.
+          </p>
+          <p>- Other features Custom resizer, responsive, auto save layout in browser's memory, handles partial visibility and etc.</p>
+        </div>
+      </div>
       <div className="grid grid-cols-7 mt-4">
         <h2 className="text-3xl bold text-slate-800 col-span-6">
           Edit Inital Config
@@ -89,7 +106,7 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
                   className="w-full"
                   list={PanesCollectionListRatioMode}
                   id="panesSet"
-                  value={activePanesSet }
+                  value={activePanesSet}
                   onChange={setActivePanesSet}
                 />
 
