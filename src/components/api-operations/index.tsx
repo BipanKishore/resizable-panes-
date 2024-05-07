@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SET_SIZE_LIST } from "../../shared/constant";
 import { Select } from "../form-controls/select";
 import TextField from "../form-controls/textfield";
@@ -6,15 +6,16 @@ import Button from "../form-controls/button";
 
 export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
   const [newSize, setNewSize] = useState<number | null | "">("");
-  const [selectedId, setSelectedId] = useState<any>(SET_SIZE_LIST[0].label);
-  const [setSizeBehaviour, setSetSizeBehaviour] = useState(SET_SIZE_LIST[0].label);
+  
+  const [selectedId, setSelectedId] = useState<any>(selectIdsOption[0]?.value);
+  const [setSizeBehaviour, setSetSizeBehaviour] = useState(SET_SIZE_LIST[0].value);
+
+  useEffect(() => {
+    const [{value = ''} = {}] = selectIdsOption
+    setSelectedId(value)
+  }, [selectIdsOption])
 
   const onChangeNewSize = () => {
-    console.log(
-      selectedId,
-      newSize,
-      setSizeBehaviour
-    );
     apiRef.current.setSize(
       selectedId,
       newSize,
@@ -24,10 +25,8 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
 
   const updateNewSize = (val: string) => {
     if (val !== "0") {
-      const numValue = Number(val);
+      const numValue = parseInt(val);
       setNewSize(numValue);
-    } else {
-      setNewSize("");
     }
   };
 
@@ -51,9 +50,10 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
   };
 
   return (
-    <div className="grid grid-cols-3">
+    <div className="grid grid-cols-2">
       <div className="grid mt-4 p-4 border rounded-lg">
         <Select
+        valueKey='value'
           label="Select Pane Id"
           className="w-full"
           list={selectIdsOption}
@@ -67,6 +67,7 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
           label="Behaviour"
           list={SET_SIZE_LIST}
           id="paneId"
+          valueKey='value'
           value={setSizeBehaviour}
           onChange={setSetSizeBehaviour}
         />
@@ -85,11 +86,10 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
           label="Change"
         />
       </div>
-      <div></div>
 
-      <div className="grid mt-4 p-4 border rounded-lg gap-7 ">
+      <div className=" mt-4 p-4 border rounded-lg gap-7 ">
         <Button onClick={onRestore} label="Restore" />
-        <Button onClick={getState} md label="Get State" />
+        <Button onClick={getState} md label="Get state" />
         <Button onClick={getSizes} label="Get sizes" />
         <Button onClick={getVisibilitiesMap} label="Get visibilities" />
       </div>

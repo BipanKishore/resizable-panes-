@@ -35,7 +35,8 @@ export const SizeStateBar = (props: any) => {
         currentSizes={currentSizes}
       />,
       <div
-        className="h-1"
+      key={i+key+i}
+        // className="h-1"
         style={{
           width: `${resizerSize}px`,
         }}

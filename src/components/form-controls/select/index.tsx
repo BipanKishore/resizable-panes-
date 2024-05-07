@@ -15,10 +15,11 @@ interface ISelect {
   value: string;
   onChange: any;
   list: ISelectList[];
+  valueKey: string
 }
 
 export const Select = (props: ISelect) => {
-  const { id, label, value, onChange, list, className } = props;
+  const { id, label, value, onChange, list, className, valueKey } = props;
 
   const onChangeSelect = (e: any) => {
     onChange(e.target.value);
@@ -40,9 +41,9 @@ export const Select = (props: ISelect) => {
         onChange={onChangeSelect}
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
       >
-        {list.map(({ label }) => (
-          <option key={label} value={label}>
-            {label}
+        {list.map(( item) => (
+          <option key={item.label} value={item[valueKey]}>
+            {item.label}
           </option>
         ))}
       </select>

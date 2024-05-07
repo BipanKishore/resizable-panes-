@@ -107,6 +107,7 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
                   list={PanesCollectionListRatioMode}
                   id="panesSet"
                   value={activePanesSet}
+                  valueKey='label'
                   onChange={setActivePanesSet}
                 />
 

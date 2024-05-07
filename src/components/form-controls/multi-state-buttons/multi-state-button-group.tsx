@@ -25,7 +25,7 @@ export const PanesVisibilityState = ({
           key={label}
           name={label}
           state={stateMap[label]}
-          className={`${paneClasses?.ring} ring-1 ring-offset-1`}
+          //className={`${paneClasse} `}
           statesClass={paneClasses}
           onClick={onClick}
         />
