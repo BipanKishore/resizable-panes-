@@ -61,7 +61,7 @@ export const SetSize = ({ apiRef, selectIdsOption }: any) => {
         <Button className="mt-1" onClick={onChangeNewSize} label="Change" />
       </div>
       <div className="font-normal mt-2 text-center text-xs text-slate-500">
-        Output is available in console.
+      It controls Resizable api's setSize method.
       </div>
     </div>
   );

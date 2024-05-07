@@ -8,7 +8,7 @@ export const VisibilityButtons = ({
   sizeStates,
 }: any) => {
   return (
-    <div className="grid mt-4 justify-center">
+    <div className="grid mt-4 text-center">
       <div>
         <PanesVisibilityState
           sizeStates={sizeStates}
@@ -17,10 +17,7 @@ export const VisibilityButtons = ({
           onClick={updateVisibilityMap}
         />
         <div className="font-normal mt-2  text-xs text-slate-500">
-          These button controls the
-          <span className="font-medium">
-            visibility prop or setVisibilities method
-          </span>
+        It controls Resizable api's setVisibilities method.
         </div>
       </div>
     </div>
