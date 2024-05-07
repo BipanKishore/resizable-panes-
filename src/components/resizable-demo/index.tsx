@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   BUTTOM_FIRST,
   VISIBLE,
-  ZIPPED,
-  rScontainerId,
+  ZIPPED
 } from "../../../src/shared/constant";
+
+import isEqual from 'lodash/isEqual';
 import {
   generatePaneModel,
   getInitialVisibility,
@@ -12,25 +13,27 @@ import {
 } from "../panes-generator";
 import { ResizablePanes } from "resizable-panes-react";
 import { DemoHeader } from "../demo-header";
-import { INITIAL_CONFIG, storageApiFlagKey, storeBooleanKey } from "./util";
+import { clearAllResizableComponentData, getInitialConfig, storeInitialConfig } from "./util";
 import { SizeStateBar } from "../size-state-bar";
 import { VisibilityButtons } from "../visibility-buttons";
 import { ApiOperations } from "../api-operations";
+import { findePanesSet } from "../../shared/pane-model-config-sets";
+import { PaneModelConfig } from "../../shared/models";
 
 export const ResizableDemo = () => {
-  const [paneComponentLists, setPaneComponentLists] = useState(
-    generatePaneModel([])
-  );
+  
+  const [initialConfig, setInitialConfig] = useState<any>(getInitialConfig());
+
+  const [paneComponentLists, setPaneComponentLists] = useState(generatePaneModel([]));
+
   const [paneIdsList, setPaneIdsList] = useState(getSelectListForPaneIds([]));
-  const [paneVisibilityState, setPaneVisibilityState] = useState(
-    getInitialVisibility([])
-  );
+
+  const [paneVisibilityState, setPaneVisibilityState] = useState(getInitialVisibility([]));
 
   const [sizeStates, setSizeState] = useState({});
 
   const [currentSizes, setCurrentSizes] = useState({});
 
-  const [initialConfig, setInitialConfig] = useState<any>({});
 
   const [shouldMountResizable, setSholdMountResizable] = useState(false);
 
@@ -54,35 +57,51 @@ export const ResizableDemo = () => {
   };
 
   const onUpdateInitalConfig = (
-    updatedInitalConfig: any,
-    allowStorageCheck = true
+    updatedInitalConfig: any
   ) => {
-    const { activePanesSet, storageApiFlag } = updatedInitalConfig;
+    const { activePanesSet} = updatedInitalConfig;
 
-    storeBooleanKey(storageApiFlagKey, storageApiFlag);
-    setInitialConfig((previousState: any) => {
-      if (allowStorageCheck) {
-        localStorage.clear();
+    const newPanesSet = findePanesSet(activePanesSet) as PaneModelConfig[]
+
+    setInitialConfig((previousConfig: any) => {
+      const initialConfigClone = {
+        ...previousConfig
       }
 
+      const updatedInitalConfigClone = {
+        ...updatedInitalConfig
+      }
+
+      delete initialConfigClone.activePanesSet
+      delete updatedInitalConfigClone.activePanesSet
+
+      if(!isEqual(initialConfigClone, updatedInitalConfigClone)) {
+        console.log(
+          initialConfigClone,
+updatedInitalConfigClone
+        )
+        clearAllResizableComponentData()
+      }
+      
       return {
-        storageApi: storageApiFlag ? localStorage : null,
         ...updatedInitalConfig,
       };
     });
+    storeInitialConfig(updatedInitalConfig)
 
+    setSizeState({})
     setSholdMountResizable(false);
-    const newPaneIdsList = getSelectListForPaneIds(activePanesSet);
+    const newPaneIdsList = getSelectListForPaneIds(newPanesSet);
     setPaneIdsList(newPaneIdsList);
-    const newPaneVisibilityState = getInitialVisibility(activePanesSet);
+    const newPaneVisibilityState = getInitialVisibility(newPanesSet);
     setPaneVisibilityState(newPaneVisibilityState);
-    const newpPaneComponentLists = generatePaneModel(activePanesSet);
+    const newpPaneComponentLists = generatePaneModel(newPanesSet);
     setPaneComponentLists(newpPaneComponentLists);
     setTimeout(() => setSholdMountResizable(true), 1);
   };
 
   useEffect(() => {
-    onUpdateInitalConfig(INITIAL_CONFIG, false);
+    onUpdateInitalConfig(getInitialConfig());
   }, []);
 
   const apiRef = useRef<any>({});
@@ -111,9 +130,9 @@ export const ResizableDemo = () => {
 
   return (
     <div className="h-100p w-100p px-6">
-      <DemoHeader onUpdateInitalConfig={onUpdateInitalConfig} />
+      <DemoHeader initialConfig={initialConfig} onUpdateInitalConfig={onUpdateInitalConfig} />
 
-      <div className="h-80 w-100p mt-5">
+      <div className="h-96 w-100p mt-5">
         {shouldMountResizable && (
           <ResizablePanes
             onResize={setCurrentSizes}
@@ -122,8 +141,9 @@ export const ResizableDemo = () => {
               apiRef.current = api;
             }}
             activeResizerClass=""
-            uniqueId={rScontainerId}
-            destroyOnHide={initialConfig.unmounOnHide}
+            storageApi={initialConfig.storageApiFlag ? sessionStorage : null}
+            uniqueId={initialConfig.activePanesSet}
+            unmounOnHide={initialConfig.unmounOnHide}
             {...initialConfig}
             resizerClass={`bg-slate-500 ${
               initialConfig.vertical ? "h-5/6 my-auto" : "w-5/6 mx-auto"

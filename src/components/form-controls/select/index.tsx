@@ -12,7 +12,7 @@ interface ISelect {
   id: string;
   label?: string;
   className?: string;
-  value: any;
+  value: string;
   onChange: any;
   list: ISelectList[];
 }
@@ -21,8 +21,7 @@ export const Select = (props: ISelect) => {
   const { id, label, value, onChange, list, className } = props;
 
   const onChangeSelect = (e: any) => {
-    const value = list.find((item) => item.label === e.target.value);
-    onChange(value);
+    onChange(e.target.value);
   };
 
   return (
@@ -36,7 +35,7 @@ export const Select = (props: ISelect) => {
         </label>
       )}
       <select
-        value={value.label}
+        value={value}
         id={id}
         onChange={onChangeSelect}
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1"

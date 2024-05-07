@@ -32,8 +32,7 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
   };
 
   const onRestore = () => {
-    const state = apiRef.current.restore();
-    console.log("Current State", state);
+    apiRef.current.restore();
   };
 
   const getState = () => {
@@ -63,14 +62,14 @@ export const ApiOperations = ({ apiRef, selectIdsOption }: any) => {
           onChange={setSelectedId}
         />
 
-        <Select
+        {/* <Select
           className="w-full"
           label="Set size behaviour"
           list={SET_SIZE_LIST}
           id="paneId"
           value={setSizeBehaviour}
           onChange={setSetSizeBehaviour}
-        />
+        /> */}
 
         <TextField
           label="New size"

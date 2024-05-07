@@ -147,3 +147,8 @@ export const PANES_COLLECTION_IN_RATIO_MODE = [
 
 
 
+export const findePanesSet = (label: string) => {
+  const panesSet = PanesCollectionListRatioMode.find((set) => set.label === label)
+  return panesSet?.value
+}
+

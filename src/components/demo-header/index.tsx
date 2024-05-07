@@ -4,13 +4,12 @@ import { AppModal } from "../modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePen } from "@fortawesome/free-solid-svg-icons";
 import { PanesCollectionListRatioMode } from "../../shared/pane-model-config-sets";
-
-import { INITIAL_CONFIG } from "../resizable-demo/util";
 import { Select } from "../form-controls/select";
 import { CheckBox } from "../form-controls/check-box";
 import TextField from "../form-controls/textfield";
+import { NPM_URL } from "../header/constant";
 
-export const DemoHeader = ({ onUpdateInitalConfig }: any) => {
+export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -22,16 +21,14 @@ export const DemoHeader = ({ onUpdateInitalConfig }: any) => {
   }
 
   const [storageApiFlag, setStorageApiFlag] = useState<boolean>(
-    INITIAL_CONFIG.storageApiFlag
+    initialConfig.storageApiFlag
   );
 
-  const [zipping, setZipping] = useState<boolean>(true);
-  const [unmounOnHide, setUnmounOnHide] = useState(false);
-  const [vertical, setVertical] = useState(true);
-  const [resizerSize, setResizerSize] = useState(INITIAL_CONFIG.resizerSize);
-  const [activePanesSet, setActivePanesSet] = useState(
-    PanesCollectionListRatioMode[5]
-  );
+  const [zipping, setZipping] = useState<boolean>(initialConfig.zipping);
+  const [unmounOnHide, setUnmounOnHide] = useState(initialConfig.unmounOnHide);
+  const [vertical, setVertical] = useState(initialConfig.vertical);
+  const [resizerSize, setResizerSize] = useState(initialConfig.resizerSize);
+  const [activePanesSet, setActivePanesSet] = useState(initialConfig.activePanesSet);
 
   const onConfirm = () => {
     const updatedInitalConfig = {
@@ -40,7 +37,7 @@ export const DemoHeader = ({ onUpdateInitalConfig }: any) => {
       unmounOnHide,
       vertical,
       resizerSize,
-      activePanesSet: activePanesSet.value,
+      activePanesSet: activePanesSet,
     };
 
     onUpdateInitalConfig(updatedInitalConfig);
@@ -61,7 +58,7 @@ export const DemoHeader = ({ onUpdateInitalConfig }: any) => {
   return (
     <div>
       <h1>
-        This library is highly customizable and can be used in various
+        The <a className="text-blue-600" href={NPM_URL}>resizable-panes-react</a> is highly customizable and can be used in various
         applications where flexible layout system is required.
       </h1>
       <div className="grid grid-cols-7 mt-4">
@@ -92,7 +89,7 @@ export const DemoHeader = ({ onUpdateInitalConfig }: any) => {
                   className="w-full"
                   list={PanesCollectionListRatioMode}
                   id="panesSet"
-                  value={activePanesSet}
+                  value={activePanesSet }
                   onChange={setActivePanesSet}
                 />
 

@@ -26,8 +26,6 @@ export const SizeStateBar = (props: any) => {
 
   const skeleton: ReactElement[] = [];
 
-  console.log(sizeStates, currentSizes);
-
   Object.keys(currentSizes).forEach((key, i) =>
     skeleton.push(
       <SkeletonItem
