@@ -17,7 +17,7 @@ export const VisibilityButtons = ({
           onClick={updateVisibilityMap}
         />
         <div className="font-normal mt-2  text-xs text-slate-500">
-          These button controls the{" "}
+          These button controls the
           <span className="font-medium">
             visibility prop or setVisibilities method
           </span>

@@ -6,21 +6,19 @@ import Button from "../form-controls/button";
 
 export const SetSize = ({ apiRef, selectIdsOption }: any) => {
   const [newSize, setNewSize] = useState<number | null | "">("");
-  
+
   const [selectedId, setSelectedId] = useState<any>(selectIdsOption[0]?.value);
-  const [setSizeBehaviour, setSetSizeBehaviour] = useState(SET_SIZE_LIST[0].value);
+  const [setSizeBehaviour, setSetSizeBehaviour] = useState(
+    SET_SIZE_LIST[0].value
+  );
 
   useEffect(() => {
-    const [{value = ''} = {}] = selectIdsOption
-    setSelectedId(value)
-  }, [selectIdsOption])
+    const [{ value = "" } = {}] = selectIdsOption;
+    setSelectedId(value);
+  }, [selectIdsOption]);
 
   const onChangeNewSize = () => {
-    apiRef.current.setSize(
-      selectedId,
-      newSize,
-      setSizeBehaviour
-    );
+    apiRef.current.setSize(selectedId, newSize, setSizeBehaviour);
   };
 
   const updateNewSize = (val: string) => {
@@ -30,30 +28,29 @@ export const SetSize = ({ apiRef, selectIdsOption }: any) => {
     }
   };
 
-
   return (
-      <div className="flex ">
+    <div>
+ <div className="p-2 flex justify-center">
         <Select
-          valueKey='value'
+          valueKey="value"
           className="mr-2"
           list={selectIdsOption}
           id="paneId"
           value={selectedId}
           onChange={setSelectedId}
-          
         />
 
         <Select
           className="mr-2"
           list={SET_SIZE_LIST}
           id="paneId"
-          valueKey='value'
+          valueKey="value"
           value={setSizeBehaviour}
           onChange={setSetSizeBehaviour}
         />
 
         <TextField
-        className="mr-2"
+          className="mr-2"
           placeholder="Size"
           value={newSize}
           name="newSize"
@@ -61,12 +58,11 @@ export const SetSize = ({ apiRef, selectIdsOption }: any) => {
           type="number"
         />
 
-        <Button
-          className="mt-1"
-          onClick={onChangeNewSize}
-          label="Change"
-        />
+        <Button className="mt-1" onClick={onChangeNewSize} label="Change" />
       </div>
-
+      <div className="font-normal mt-2 text-center text-xs text-slate-500">
+        Output is available in console.
+      </div>
+    </div>
   );
 };
