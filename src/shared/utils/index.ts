@@ -42,3 +42,7 @@ export const getOnOffInitialState = (val: boolean, defaultValue = 'on') => {
       value: key
     }))
   }
+
+  export function detectMob() {
+    return ( ( window.innerWidth <= 800 ) );
+  }

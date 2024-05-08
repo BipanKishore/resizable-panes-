@@ -1,4 +1,5 @@
 import { PanesCollectionListRatioMode } from "../../shared/pane-model-config-sets"
+import { detectMob } from "../../shared/utils"
 
  const initialConfigKey = 'initial-config'
 
@@ -8,10 +9,9 @@ export const INITIAL_CONFIG = {
   vertical: true,
   unmounOnHide: true,
   storageApiFlag: false,
-  resizerSize: 2,
+  resizerSize:  detectMob() ? 5 : 2,
   activePanesSet: PanesCollectionListRatioMode[4].label
 }
-
 
 export const clearAllResizableComponentData = () => {
   PanesCollectionListRatioMode.forEach((item) => {
