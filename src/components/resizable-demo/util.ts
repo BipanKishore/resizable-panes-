@@ -1,29 +1,36 @@
 import { PanesCollectionListRatioMode } from "../../shared/pane-model-config-sets"
 
-export const storageApiFlagKey = 'storageApiFlag'
+ const initialConfigKey = 'initial-config'
 
-export const getSstorageApiFlagValue = (key: string) => JSON.parse(localStorage.getItem(key) as string) ?? false
-export const storeBooleanKey = (key: string, value: boolean) => localStorage.setItem(key, value + '')
-
-console.log(
-  'getSstorageApiFlagValue(storageApiFlagKey)', getSstorageApiFlagValue(storageApiFlagKey)
-)
 
 export const INITIAL_CONFIG = {
   zipping: true,
   vertical: true,
   unmounOnHide: true,
-  storageApiFlag: getSstorageApiFlagValue(storageApiFlagKey),
-  resizerSize: 1,
-  activePanesSet: PanesCollectionListRatioMode[5].value
+  storageApiFlag: false,
+  resizerSize: 2,
+  activePanesSet: PanesCollectionListRatioMode[4].label
 }
 
-export const initialResizableFormValues = {
-    paneId: 'P0',
-    newSize: 0,
-    zipping: true,
-    vertical: true,
-    destroyOnHide: true,
-    storageApi: false,
-    resizerSize: 1
-  }
+
+export const clearAllResizableComponentData = () => {
+  PanesCollectionListRatioMode.forEach((item) => {
+    localStorage.removeItem(item.label)
+  })
+}
+
+export const storeInitialConfig = (config: any) => {
+  const value = JSON.stringify(config)
+  localStorage.setItem(initialConfigKey, value)
+}
+
+export const getInitialConfig = () => {
+  const stringifyValue = localStorage.getItem(initialConfigKey)
+
+  return stringifyValue ? JSON.parse(stringifyValue) : INITIAL_CONFIG
+}
+
+
+
+
+

@@ -2,23 +2,13 @@ import { Pane } from "resizable-panes-react";
 import { PaneModelConfig } from "../../../src/shared/models";
 import React from "react";
 import { Loading } from "../Loading";
-import { ISelectList } from "../select";
 import { paneClasses } from "./pane-css";
+import { ISelectList } from "../form-controls/select";
 
 
 
 export const generatePaneModel = (list: PaneModelConfig[]) => {
   const paneComponentLists = list.map(({ size, minSize, maxSize }, index) => {
-
-    const onNormalSize =(id: string) => {
-      console.log('v-- onNormalSize', id)
-    }
-    const onMinSize = (id: string, size: number) => {
-      console.log('v-- onMinSize', id, size)
-    }
-    const onMaxSize = (id: string, size: number) => {
-      console.log('v-- onMaxSize', id, size)
-    }
 
     return (
       <Pane
@@ -28,10 +18,6 @@ export const generatePaneModel = (list: PaneModelConfig[]) => {
       maxSize={maxSize}
       minSize={minSize}
       size={size}
-      maxSizeClass={'opacity-80 '}
-      minSizeClass={'opacity-35'}
-
-
     >
       <div className="mt-8 text-slate-700">
         {<h2>{`P${index}`}</h2>}
