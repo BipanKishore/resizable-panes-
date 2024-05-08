@@ -147,7 +147,7 @@ export const ResizableDemo = () => {
               }}
               activeResizerClass=""
               storageApi={initialConfig.storageApiFlag ? sessionStorage : null}
-              uniqueId={initialConfig.activePanesSet}
+              uniqueId={JSON.stringify(initialConfig)}
               unmounOnHide={initialConfig.unmounOnHide}
               {...initialConfig}
               resizerClass={`bg-slate-400 ${
