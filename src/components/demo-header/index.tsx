@@ -53,34 +53,43 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
     }
   };
 
-  const onChangeStorageApiFlag = (flag: boolean) => {
-    setStorageApiFlag(flag);
-  };
-
   return (
     <div>
       <div>
-        <div className="text-2xl" >
+        <div className="text-2xl">
           Why to use{" "}
-          <a className="text-blue-600" href={NPM_URL}>
+          <a className="text-blue-500" href={NPM_URL}>
             resizable-panes-react
           </a>
           :
         </div>
-        <div className="text-orange-600">
-          <p >
-            - In build api methods to control visibility, resizing of panes and
-            to get state of panes.
-          </p>
-          <p>
-            - No Unnecessary Rerenderring while resizing and visibility operations and can keep component rendered in hidden state.
-          </p>
-          <p>- Other features Custom resizer, responsive, auto save layout in browser's memory, handles partial visibility and etc.</p>
+        <div className="text-slate-600 ml-8">
+          <ul className="list-disc">
+            <li className="my-2">
+              <p>
+                In build api methods to control visibility, resizing of panes
+                and to get state of panes.
+              </p>
+            </li>
+
+            <li className="mb-2">
+              <p>
+                No Unnecessary Rerenderring while resizing and visibility
+                operations and can keep component rendered in hidden state.
+              </p>
+            </li>
+            <li className="mb-2">
+              <p>
+                Other features Custom Resizer, Responsive, Auto Save Layout in
+                browser's memory, handles Partial Visibility, Nesting and <a className="text-blue-500" href={NPM_URL}>read more</a>.
+              </p>
+            </li>
+          </ul>
         </div>
       </div>
       <div className="grid grid-cols-7 mt-4">
-        <h2 className="text-3xl bold text-slate-800 col-span-6">
-          Edit Inital Config
+        <h2 className="text-2xl bold text-slate-800 col-span-6">
+        Editing Inital Config!
         </h2>
         <div className="justify-self-end text-xl self-center cursor-pointer">
           <FontAwesomeIcon
@@ -107,7 +116,7 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
                   list={PanesCollectionListRatioMode}
                   id="panesSet"
                   value={activePanesSet}
-                  valueKey='label'
+                  valueKey="label"
                   onChange={setActivePanesSet}
                 />
 
@@ -148,7 +157,7 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
                   cyId="btn-storage-api"
                   name="storageApi"
                   value={storageApiFlag}
-                  onChange={onChangeStorageApiFlag}
+                  onChange={setStorageApiFlag}
                   label="Storage Api"
                 />
               </div>
