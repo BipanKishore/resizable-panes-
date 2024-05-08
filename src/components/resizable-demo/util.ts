@@ -20,8 +20,8 @@ export const clearAllResizableComponentData = () => {
 }
 
 export const storeInitialConfig = (config: any) => {
-  localStorage.setItem(initialConfigKey, value)
   const value = JSON.stringify(config)
+  localStorage.setItem(initialConfigKey, value)
 }
 
 export const getInitialConfig = () => {
