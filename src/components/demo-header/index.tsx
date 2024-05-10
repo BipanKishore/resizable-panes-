@@ -28,9 +28,8 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
   const [unmounOnHide, setUnmounOnHide] = useState(initialConfig.unmounOnHide);
   const [vertical, setVertical] = useState(initialConfig.vertical);
   const [resizerSize, setResizerSize] = useState(initialConfig.resizerSize);
-  const [activePanesSet, setActivePanesSet] = useState(
-    initialConfig.activePanesSet
-  );
+
+  const [activePanesSet, setActivePanesSet] = useState(initialConfig.activePanesSet);
 
   const onConfirm = () => {
     const updatedInitalConfig = {
