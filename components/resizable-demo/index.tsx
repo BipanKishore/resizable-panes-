@@ -66,7 +66,6 @@ export const ResizableDemo = (props: any) => {
     const {name, checked} = e
     const previousVisibilityState =  apiRef.current.getVisibilitiesMap()
     const previousState = previousVisibilityState[name]
-    console.log(previousState, previousState, previousState)
     
     const newVisibilityMap = {
       ...paneVisibilityState,
@@ -74,7 +73,6 @@ export const ResizableDemo = (props: any) => {
     }
     apiRef.current.setVisibilities(newVisibilityMap)
     if(previousState === 'zipped'){
-      console.log(previousState, previousState, previousState)
       apiRef.current.setSize(name, 100)
     }
     

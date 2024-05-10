@@ -77,7 +77,6 @@ export const ResizableDemo = () => {
       delete updatedInitalConfigClone.activePanesSet;
 
       if (!isEqual(initialConfigClone, updatedInitalConfigClone)) {
-        console.log(initialConfigClone, updatedInitalConfigClone);
         clearAllResizableComponentData();
       }
 
