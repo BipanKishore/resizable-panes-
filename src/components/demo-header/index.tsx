@@ -45,9 +45,9 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
     closeModal();
   };
 
-  const onChangeResizer = (value: string) => {
-    const numValue = Number(value);
-    if (numValue > 0) {
+  const onChangeResizer = (val: string) => {
+    if (val !== "0") {
+      const numValue = parseInt(val);
       setResizerSize(numValue);
     }
   };
