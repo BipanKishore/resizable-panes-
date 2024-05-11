@@ -21,7 +21,7 @@
     "react-dom": "^18.3.1",
     "react-modal": "^3.16.1",
     "react-scripts": "5.0.1",
-    "resizable-panes-react": "^4.0.65",
+    "resizable-panes-react": "^4.0.69",
     "tailwindcss": "^3.4.3",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
@@ -34,7 +34,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "install-resizable": "npm install resizable-panes-react@latest",
+    "prelink-local": "rimraf node_modules/.cache",
     "link-local": "npm link resizable-panes-react react",
+    "postlink-local": "react-scripts start",
     "unlink-local": "npm install resizable-panes-react@latest react"
   },
   "eslintConfig": {
