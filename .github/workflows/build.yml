@@ -38,5 +38,9 @@ jobs:
       with:
         branch: gh-pages
         folder: build
+    - name: Echo test
+      run: echo "Hey Bro"
+    - name: Echo ref
+      run: echo ${{github}}
         
 
