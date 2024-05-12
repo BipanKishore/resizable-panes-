@@ -22,10 +22,8 @@ export const SetSize = ({ apiRef, selectIdsOption }: any) => {
   };
 
   const updateNewSize = (val: string) => {
-    if (val !== "0") {
       const numValue = parseInt(val);
       setNewSize(numValue);
-    }
   };
 
   return (

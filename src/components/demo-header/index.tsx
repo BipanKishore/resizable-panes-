@@ -86,8 +86,8 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
             </li>
             <li className="mb-2">
               <p>
-                Other features Custom Resizer, Responsive, Auto Save Layout in
-                browser's memory, handles Partial Visibility, Nesting and{" "}
+                Other features Detection Radius (best for mobile devices), Custom Resizer, Responsive, Auto Save Layout in
+                browser's memory, Nesting and{" "}
                 <a className="text-blue-500" href={NPM_URL}>
                   read more
                 </a>
