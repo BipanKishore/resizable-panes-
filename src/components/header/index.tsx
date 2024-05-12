@@ -8,7 +8,7 @@ const Header = () => {
     <div className='header bg-gray-100 leading-9 p-1.5 mt-5 mb-10  rounded-xl py-3 px-2.5  top-0 z-40'>
       <div className='md:grid grid-cols-8 hidden'>
         <div />
-        <h2 className='m0 text-center col-span-6 text-3xl'>Resizable Panes React</h2>
+        <h2 className='m0 text-center col-span-6 text-3xl'>Resizable Panes React @6x</h2>
         <Links  className='md:inline-flex hidden mr-2' />
       </div>
 
