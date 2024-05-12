@@ -41,6 +41,6 @@ jobs:
     - name: Echo test
       run: echo "Hey Bro"
     - name: Echo ref
-      run: echo ${{github}}
+      run: echo ${{github.action}} ${{github.event}} ${{github.ref}}
         
 
