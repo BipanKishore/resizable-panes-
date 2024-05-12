@@ -4,12 +4,13 @@ import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Button from "../form-controls/button";
+import { detectMob } from "../../shared/utils";
 
 Modal.setAppElement("#root");
 
 const customStyles = {
   content: {
-    top: "30%",
+    top: detectMob()? "50%": "30%",
     left: "50%",
     right: "auto",
     bottom: "auto",
