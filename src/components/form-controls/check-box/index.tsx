@@ -4,7 +4,7 @@ import {  faSquare } from '@fortawesome/free-regular-svg-icons'
 
 
 
-export const CheckBox = ({ name,value, onChange, label }: any) => {
+export const CheckBox = ({ name,value, onChange, label, className }: any) => {
 
     const state = value 
 
@@ -13,7 +13,7 @@ export const CheckBox = ({ name,value, onChange, label }: any) => {
     }
 
     return (
-        <div className='flex cursor-pointer' onClick={onClick}>
+        <div className={`${className} flex cursor-pointer`} onClick={onClick}>
             {
                 state
                     ? <FontAwesomeIcon icon={faSquareCheck} className='text-cyan-600' size="lg" />

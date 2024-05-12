@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AppModal } from "../modal";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilePen } from "@fortawesome/free-solid-svg-icons";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { PanesCollectionListRatioMode } from "../../shared/pane-model-config-sets";
 import { Select } from "../form-controls/select";
 import { CheckBox } from "../form-controls/check-box";
@@ -24,33 +24,40 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
     initialConfig.storageApiFlag
   );
 
-  const [zipping, setZipping] = useState<boolean>(initialConfig.zipping);
+  const [detectionRadius, setDetectionRadius] = useState<number>(initialConfig.detectionRadius);
   const [unmounOnHide, setUnmounOnHide] = useState(initialConfig.unmounOnHide);
   const [vertical, setVertical] = useState(initialConfig.vertical);
   const [resizerSize, setResizerSize] = useState(initialConfig.resizerSize);
 
-  const [activePanesSet, setActivePanesSet] = useState(initialConfig.activePanesSet);
+  const [activePanesSet, setActivePanesSet] = useState(
+    initialConfig.activePanesSet
+  );
 
   const onConfirm = () => {
     const updatedInitalConfig = {
       storageApiFlag,
-      zipping,
+      detectionRadius,
       unmounOnHide,
       vertical,
       resizerSize,
       activePanesSet: activePanesSet,
     };
-
+    
     onUpdateInitalConfig(updatedInitalConfig);
     closeModal();
   };
 
   const onChangeResizer = (val: string) => {
-    if (val !== "0") {
-      const numValue = parseInt(val);
-      setResizerSize(numValue);
-    }
+    const numValue = parseInt(val);
+    setResizerSize(numValue);
   };
+
+  const onChangeRadius = (val: string) => {
+    const numValue = parseInt(val);
+    setDetectionRadius(numValue);
+  };
+
+
 
   return (
     <div>
@@ -80,7 +87,11 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
             <li className="mb-2">
               <p>
                 Other features Custom Resizer, Responsive, Auto Save Layout in
-                browser's memory, handles Partial Visibility, Nesting and <a className="text-blue-500" href={NPM_URL}>read more</a>.
+                browser's memory, handles Partial Visibility, Nesting and{" "}
+                <a className="text-blue-500" href={NPM_URL}>
+                  read more
+                </a>
+                .
               </p>
             </li>
           </ul>
@@ -88,12 +99,12 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
       </div>
       <div className="grid grid-cols-7 mt-4">
         <h2 className="text-2xl bold text-slate-800 col-span-6">
-        Editing Inital Config!
+          Editing Inital Config!
         </h2>
         <div className="justify-self-end text-xl self-center cursor-pointer">
           <FontAwesomeIcon
             onClick={openModal}
-            icon={faFilePen}
+            icon={faGear}
             className="text-cyan-600 hover:text-cyan-500"
             size="lg"
           />
@@ -128,16 +139,18 @@ export const DemoHeader = ({ onUpdateInitalConfig, initialConfig }: any) => {
                   type="number"
                 />
 
-                <CheckBox
-                  cyId="btn-zipping"
-                  name="zipping"
-                  value={zipping}
-                  onChange={setZipping}
-                  label="Zipping"
+                <TextField
+                  
+                  label="Detection Radius"
+                  name="detectionRadius"
+                  onChange={onChangeRadius}
+                  value={detectionRadius}
+                  type="number"
                 />
 
                 <CheckBox
-                  cyId="btn-zipping"
+                className="md:mt-7 mt-0"
+                  cyId="btn-destroyOnHide"
                   name="destroyOnHide"
                   value={unmounOnHide}
                   onChange={setUnmounOnHide}

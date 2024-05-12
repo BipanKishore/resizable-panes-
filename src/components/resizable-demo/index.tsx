@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { BUTTOM_FIRST, VISIBLE, ZIPPED } from "../../../src/shared/constant";
 
 import isEqual from "lodash/isEqual";
 import {
@@ -7,7 +6,7 @@ import {
   getInitialVisibility,
   getSelectListForPaneIds,
 } from "../panes-generator";
-import { ResizablePanes } from "resizable-panes-react";
+import { RATIO, ResizablePanes } from "resizable-panes-react";
 import { DemoHeader } from "../demo-header";
 import {
   clearAllResizableComponentData,
@@ -36,7 +35,7 @@ export const ResizableDemo = () => {
 
   const [sizeStates, setSizeState] = useState({});
 
-  const [currentSizes, setCurrentSizes] = useState({});
+  const [currentSizes, setCurrentSizes] = useState<any>({});
 
   const [shouldMountResizable, setSholdMountResizable] = useState(false);
 
@@ -106,20 +105,12 @@ export const ResizableDemo = () => {
   const updateVisibilityMap = (e: any) => {
     const { name, checked } = e;
     const previousState = paneVisibilityState[name];
-
-    if (previousState === ZIPPED) {
-      apiRef.current.setSize(name, 150, BUTTOM_FIRST);
+    const currentSize = currentSizes[name]
+    if (previousState === true && currentSize ===0) {
+      apiRef.current.setSize(name, 150, RATIO);
     } else {
-      const newVisibilityMap: any = {};
-
-      Object.keys(paneVisibilityState).forEach((key) => {
-        newVisibilityMap[key] = [VISIBLE, ZIPPED].includes(
-          paneVisibilityState[key]
-        );
-      });
-
       apiRef.current.setVisibilities({
-        ...newVisibilityMap,
+        ...paneVisibilityState,
         [name]: checked,
       });
     }
@@ -145,7 +136,6 @@ export const ResizableDemo = () => {
             activeResizerClass=""
             storageApi={initialConfig.storageApiFlag ? sessionStorage : null}
             uniqueId={JSON.stringify(initialConfig)}
-            unmounOnHide={initialConfig.unmounOnHide}
             {...initialConfig}
             resizerClass={`bg-slate-400 ${
               vertical ? "h-5/6 my-auto" : "w-5/6 mx-auto"

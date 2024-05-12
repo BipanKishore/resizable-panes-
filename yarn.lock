@@ -8335,10 +8335,12 @@ requires-port@^1.0.0:
   resolved "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz"
   integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
 
-resizable-panes-react@^4.0.69:
-  version "4.0.69"
-  resolved "https://registry.npmjs.org/resizable-panes-react/-/resizable-panes-react-4.0.69.tgz"
-  integrity sha512-5mRmgBfT3mw8h1KIZ5ckTikbfo+G4V67lu8MH6pXmUaS62e6WHHmaVvPBx/AkFkm7G/ncLwPDGgznL01nF5jgg==
+resizable-panes-react@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.npmjs.org/resizable-panes-react/-/resizable-panes-react-6.0.2.tgz"
+  integrity sha512-ZN/blaKOFIDA3lP7xp4D2xrCNywEvr+Cq9JqzM8koSU9ckQ7fcxOO36L9AJG8pJJalgS3Pk3hg/ynp4iuXOTkw==
+  dependencies:
+    throttleit "^2.0.0"
 
 resolve-cwd@^3.0.0:
   version "3.0.0"
@@ -9271,6 +9273,11 @@ throat@^6.0.1:
   version "6.0.2"
   resolved "https://registry.npmjs.org/throat/-/throat-6.0.2.tgz"
   integrity sha512-WKexMoJj3vEuK0yFEapj8y64V0A6xcuPuK9Gt1d0R+dzCSJc0lHqQytAbSB4cDAK0dWh4T0E2ETkoLE2WZ41OQ==
+
+throttleit@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/throttleit/-/throttleit-2.0.0.tgz"
+  integrity sha512-9VImOCJfOMzgBNJIa8ifGnJbAY3XGkl+mGV/+N69+L07QXrg6B6FqPI+2MCqdO5Ojega5BsA94zKHh2rHsQW9Q==
 
 thunky@^1.0.2:
   version "1.1.0"

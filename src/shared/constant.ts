@@ -1,4 +1,6 @@
+import { RATIO as RATIO_B, BUTTOM_FIRST, TOP_FIRST } from "resizable-panes-react";
 // Need to make Plain
+
 export const DIRECTIONS = {
   DOWN: -1,
   NONE: 0,
@@ -52,14 +54,14 @@ export const RESIZE_HTML_EVENT = 'resize'
 export const ON = 'on'
 export const OFF = 'off'
 
+
 export const rScontainerId = 'rScontainerId'
 export const mountUnMountButtonId = 'hide-resizable-panes'
 
 export const loadingId = 'loading'
 export const loadedId = 'loaded'
 
-export const BUTTOM_FIRST = 'buttomFirst'
-export const TOP_FIRST = 'topFirst'
+
 export const SET_SIZE_LIST = [
   {
     label: 'Buttom First',
@@ -71,6 +73,6 @@ export const SET_SIZE_LIST = [
   },
   {
     label: 'Ratio',
-    value: RATIO
+    value: RATIO_B
   }
 ]

@@ -5,11 +5,11 @@ import { detectMob } from "../../shared/utils"
 
 
 export const INITIAL_CONFIG = {
-  zipping: true,
+  detectionRadius: detectMob() ? 10 : 7,
   vertical: true,
   unmounOnHide: true,
   storageApiFlag: false,
-  resizerSize:  detectMob() ? 5 : 2,
+  resizerSize:  1,
   activePanesSet: PanesCollectionListRatioMode[4].label
 }
 

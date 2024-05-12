@@ -12,7 +12,7 @@ export const generatePaneModel = (list: PaneModelConfig[]) => {
 
     return (
       <Pane
-      className={`${paneClasses[index].container} text-center text-2xl text-white rounded-lg`}
+      className={`${paneClasses[index % (paneClasses.length -1)].container} text-center text-2xl text-white rounded-lg`}
       id={`P${index}`}
       key={index}
       maxSize={maxSize}
