@@ -27,7 +27,7 @@ interface IAppModal {
   onConfirm: any;
 }
 
-console.log(customStyles)
+
 
 export function AppModal(props: IAppModal) {
   const { isOpen, closeModal, title, children, onConfirm } = props;
