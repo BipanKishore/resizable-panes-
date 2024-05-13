@@ -51,6 +51,6 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@4.1.0
       with:
         branch: gh-pages
-        folder: docs
+        folder: ~packages\demo\docs
         
 
