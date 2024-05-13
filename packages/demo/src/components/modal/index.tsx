@@ -10,7 +10,7 @@ Modal.setAppElement("#root");
 
 const customStyles = {
   content: {
-    top: detectMob()? "51npx lerna init --packages="packages/*"%": "30%",
+    top: detectMob()? "51%": "30%",
     left: "50%",
     right: "auto",
     bottom: "auto",
