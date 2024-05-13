@@ -1,4 +1,4 @@
-name: Build
+name: Build-&-Deploy
 
 on:
   push:
@@ -33,6 +33,14 @@ jobs:
     - name: New Docs
       run: |
         npm run docs
+
+    - name: Upload artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with: 
+        path: cypress/screenshots
+        retention-days: 30
+
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.0
       with:
