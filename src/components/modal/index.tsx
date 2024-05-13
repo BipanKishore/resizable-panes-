@@ -10,7 +10,7 @@ Modal.setAppElement("#root");
 
 const customStyles = {
   content: {
-    top: detectMob()? "50%": "30%",
+    top: detectMob()? "51%": "30%",
     left: "50%",
     right: "auto",
     bottom: "auto",
