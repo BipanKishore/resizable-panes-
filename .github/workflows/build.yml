@@ -37,10 +37,6 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@4.1.0
       with:
         branch: gh-pages
-        folder: build
-    - name: Echo test
-      run: echo "Hey Bro"
-    - name: Echo ref
-      run: echo ${{github.action}} event ${{github.ref}} ref ${{github.ref}} event_name ${{github.event_name}}
+        folder: docs
         
 

@@ -8335,10 +8335,10 @@ requires-port@^1.0.0:
   resolved "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz"
   integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
 
-resizable-panes-react@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.npmjs.org/resizable-panes-react/-/resizable-panes-react-6.0.3.tgz"
-  integrity sha512-au1UPMvoy2kRL+GmmfvTKSisI+fXb/w8M6R/a7uiF0EKZLGPA3wjEvsdKYAq+fRyef05YhtOa6sdz4o1M1Fmfw==
+resizable-panes-react@^6.0.4:
+  version "6.0.4"
+  resolved "https://registry.npmjs.org/resizable-panes-react/-/resizable-panes-react-6.0.4.tgz"
+  integrity sha512-NKxraBPt8rTDOTHw2KjvaQ+c3Le7MHTpZ8yTWy3vJBF1cDsF3dSa3C8BjJOG/cMkF52tbcZ55I9IrHC7yD4JCw==
   dependencies:
     throttleit "^2.0.0"
 
